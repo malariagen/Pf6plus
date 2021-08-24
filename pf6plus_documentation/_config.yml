@@ -1,0 +1,16 @@
+title: Pf6+ User Guide
+author: 
+copyright: "2021"
+logo: images/pf6plus-logo.png
+execute:
+  execute_notebooks: "off"
+repository:    
+  url: https://github.com/malariagen/Pf6plus
+  path_to_book              : notebooks
+  branch                    : add_jupyter_notebooks
+launch_buttons:
+  notebook_interface: "jupyterlab"
+  colab_url: "https://colab.research.google.com"
+html:
+  use_repository_button : true
+  use_issues_button: true
