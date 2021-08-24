@@ -1,4 +1,4 @@
 *.log
 .ipynb_checkpoints
 *__pycache__/
-*build/
+*_build/
