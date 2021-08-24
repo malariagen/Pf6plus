@@ -1,0 +1,8 @@
+format: jb-book
+root: landing-page
+parts:
+  - caption: Pf6+ 
+    chapters:
+    - file: notebooks/1_partners_270921.ipynb
+    - file: notebooks/2_prevalence_DR_haps_270921.ipynb
+    - file: notebooks/3_phenotyper.ipynb
