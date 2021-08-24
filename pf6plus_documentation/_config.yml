@@ -4,8 +4,8 @@ copyright: "2021"
 logo: images/pf6plus-logo.png
 execute:
   execute_notebooks: "off"
-#repository:    
-#  url: https://gitlab.com/malariagen/gsp/pf6plus
+repository:    
+  url: https://github.com/malariagen/Pf6plus
 #  path_to_book              : notebooks
 #  branch                    : add_jupyter_notebooks
 launch_buttons:
