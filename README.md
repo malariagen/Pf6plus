@@ -1,6 +1,7 @@
 !["PF6+ logo"](pf6plus_documentation/images/pf6plus-logo.png)
 
-Analysis of aggregated phenotype and genotype data (amplicon + Pf6 WGS).
+#Pf6+
+**_Analysis of aggregated phenotype and genotype data (amplicon + Pf6 WGS)._**
 
 This repository provides an issue tracker and technical documentation for Pf6+.
 
