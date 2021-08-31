@@ -223,26 +223,28 @@
   <a class="reference internal nav-link" href="#setup">
    Setup
   </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#running-on-colab">
-   Running on Colab
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#running-locally">
-   Running Locally
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#import-the-python-scripts">
-   Import the python scripts
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#import-data">
-   Import data
-  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#running-on-colab">
+     Running on Colab
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#running-locally">
+     Running Locally
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#import-the-python-scripts">
+     Import the python scripts
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#import-data">
+     Import data
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#prevalence-of-resistant-variants">
@@ -292,9 +294,8 @@
 <p>This notebook allows you to use the Phenotyper tool to infer phenotypes from your own data. After achieving this, you can use our simple visualisation tools to see your results and compare them with our Pf6+ dataset, which stores over 13,500 samples with inferred phenotypes, collected across the world.</p>
 <div class="section" id="setup">
 <h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h2>
-</div>
 <div class="section" id="running-on-colab">
-<h2>Running on Colab<a class="headerlink" href="#running-on-colab" title="Permalink to this headline">¶</a></h2>
+<h3>Running on Colab<a class="headerlink" href="#running-on-colab" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">google.colab</span> <span class="kn">import</span> <span class="n">drive</span>
@@ -317,11 +318,11 @@
 </div>
 </div>
 <div class="section" id="running-locally">
-<h2>Running Locally<a class="headerlink" href="#running-locally" title="Permalink to this headline">¶</a></h2>
+<h3>Running Locally<a class="headerlink" href="#running-locally" title="Permalink to this headline">¶</a></h3>
 <p>There are some steps you need to follow before opening the notebooks to run them locally. If you haven’t already, please follow these <a class="reference external" href="https://gitlab.com/malariagen/gsp/pf6plus/-/tree/add_jupyter_notebooks/notebooks#running-locally">instructions</a>.</p>
 </div>
 <div class="section" id="import-the-python-scripts">
-<h2>Import the python scripts<a class="headerlink" href="#import-the-python-scripts" title="Permalink to this headline">¶</a></h2>
+<h3>Import the python scripts<a class="headerlink" href="#import-the-python-scripts" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -357,7 +358,7 @@
 </div>
 </div>
 <div class="section" id="import-data">
-<h2>Import data<a class="headerlink" href="#import-data" title="Permalink to this headline">¶</a></h2>
+<h3>Import data<a class="headerlink" href="#import-data" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#input Pf6+ data </span>
@@ -372,6 +373,7 @@
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pf6plus</span><span class="o">=</span><span class="n">pf6plus</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">pf6plus</span><span class="o">.</span><span class="n">IncludeInAnalysis</span><span class="o">==</span><span class="kc">True</span><span class="p">]</span>
 </pre></div>
+</div>
 </div>
 </div>
 </div>
