@@ -344,20 +344,29 @@ install.packages(&#39;jsonlite&#39;)
 </div>
 </div>
 </div>
-<p>Please set the following paths to the phenotyper, rules file, and where you would like to store the output</p>
+<p>Download the phenotyper tool if you haven’t already</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#TO DO: this will only work once the phenotyper repo has been made public</span>
+<span class="o">!</span>git clone https://github.com/malariagen/phenotyper.git
+</pre></div>
+</div>
+</div>
+</div>
+<p>Below we set the paths to the phenotyper.r script, the rules file, the output file containing the phenotypes. <code class="docutils literal notranslate"><span class="pre">PATH_TO_PHENOTYPER</span></code> and <code class="docutils literal notranslate"><span class="pre">PATH_TO_RULES</span></code> are set to the files cloned from git above. Please set <code class="docutils literal notranslate"><span class="pre">PATH_TO_OUTPUT</span></code></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#SET VARIABLES FOR RUNNING PHENOTYPER HERE </span>
-<span class="o">%</span><span class="k">env</span> PATH_TO_PHENOTYPER=&lt;Enter path to phenotyper&gt;
-<span class="o">%</span><span class="k">env</span> PATH_TO_RULES=&lt;Enter path to rules&gt;
-<span class="o">%</span><span class="k">env</span> PATH_TO_OUTPUT=&lt;Enter path for output&gt;
+<span class="o">%</span><span class="k">env</span> PATH_TO_PHENOTYPER=./phenotyper/phenotyper.r 
+<span class="o">%</span><span class="k">env</span> PATH_TO_RULES=./phenotyper/ext/rules/test_rules_310821.json
+<span class="o">%</span><span class="k">env</span> PATH_TO_OUTPUT=#Enter path for output file
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>env: PATH_TO_PHENOTYPER=&lt;Enter path to phenotyper&gt;
-env: PATH_TO_RULES=&lt;Enter path to rules&gt;
-env: PATH_TO_OUTPUT=&lt;Enter path for output&gt;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>env: PATH_TO_PHENOTYPER=./phenotyper/phenotyper.r
+env: PATH_TO_RULES=./phenotyper/ext/rules/test_rules_310821.json
+env: PATH_TO_OUTPUT=#Enter path for output file
 </pre></div>
 </div>
 </div>
@@ -368,17 +377,10 @@ env: PATH_TO_OUTPUT=&lt;Enter path for output&gt;
 <p>You will need to upload a GRC to run the phenotyper. You can choose to use the default example or upload your own (either from your own maching or google drive). Just follow the relevant instructions below depending on which GRC you would like to use.</p>
 <div class="section" id="example-grc">
 <h3>Example GRC<a class="headerlink" href="#example-grc" title="Permalink to this headline">¶</a></h3>
-<p>To run the notebook with the example GRC that we provide run the following:</p>
+<p>To run the notebook with the example GRC, that is in the phenotyper repository that you cloned above, run the following:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>wget &lt;Path to fake GRC&gt;
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">env</span> PATH_TO_GRC=&lt;Path to fake GRC&gt;
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">env</span> PATH_TO_GRC=./phenotyper/ext/fake_grc/mygrc_metadata_genotypes.tsv
 </pre></div>
 </div>
 </div>
