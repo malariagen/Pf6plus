@@ -2,7 +2,8 @@ import math
 import matplotlib.pyplot as plt
 import matplotlib.colors as mcolors
 import numpy as np
-import panel as pn
+
+# import panel as pn
 
 # Bokeh Libraries
 import numpy as np
@@ -14,10 +15,13 @@ import bokeh.palettes
 import pandas as pd
 from bokeh.layouts import gridplot
 from bokeh.models import ColumnDataSource, HoverTool
-from bokeh.palettes import Category10, Accent, Dark2, Turbo256
+
+from bokeh.palettes import Category10, Accent, Dark2, inferno
 import itertools
 from bokeh.transform import dodge
 from math import pi
+
+# from bokeh._legacy_charts import Bar
 
 
 class Subplots:
@@ -30,7 +34,7 @@ class Subplots:
         self.colours = colours
         if self.colours:
             self.colour_code_dict = {}
-            self.colour_options = Category10[10] + Accent[8] + Dark2[8] + Turbo256
+            self.colour_options = Category10[10] + Accent[8] + Dark2[8] + inferno(40)
 
     def add_colour_to_dictionary(self, new_key):
         if new_key not in self.colour_code_dict:
@@ -134,6 +138,7 @@ class Subplots:
         hover = HoverTool()
         hover.tooltips = """
         <div>
+            <div></strong>$name</div>
             <div><strong>Count: </strong>@$name</div>
         </div>"""
         figure.add_tools(hover)
@@ -146,6 +151,48 @@ class Subplots:
         figure.yaxis.axis_label = "# of samples"
         self.figures.append(figure)
         return figure
+
+    def add_bar_plot_stacked(self, dataframe):
+        # Convert input to correct format
+        data = dataframe.to_dict("list")
+        data["Countries"] = list(dataframe.index)
+        studies = list(dataframe.columns)
+
+        # Plot
+
+        figure = bokeh.plotting.figure(
+            x_range=data["Countries"],
+            title="Studies contributing to Pf6+ across countries",
+            toolbar_location="above",
+            tools="pan,wheel_zoom,box_zoom,reset,tap",
+            active_scroll="wheel_zoom",
+            active_drag="pan",
+        )
+
+        figure.vbar_stack(
+            studies,
+            x="Countries",
+            name=studies,
+            line_color="black",
+            width=0.9,
+            source=data,
+            color=self.colour_options[: len(studies)],
+        )
+
+        hover = HoverTool()
+        hover.tooltips = """
+        <div>
+            <div><strong>Country: </strong>$name</div>
+            <div><strong>Count: </strong>@$name</div>
+        </div>"""
+        figure.add_tools(hover)
+
+        figure.x_range.range_padding = 0.1
+        figure.xgrid.grid_line_color = None
+        figure.xaxis.major_label_orientation = pi / 4
+        figure.xaxis.axis_label = "Countries"
+        figure.yaxis.axis_label = "# of samples"
+        bokeh.plotting.show(figure)
 
     def fill_figure_grid(self):
         if (len(self.figures) % 2) != 0:
@@ -166,3 +213,12 @@ def assign_variables_colours(variables):
     )
     variable_colours = {keys[i]: colour_options[i] for i in range(len(keys))}
     return variable_colours
+
+
+def plot_samples_per_country_and_study(dataset):
+    figure = Subplots(colours=True)
+    # Find samples per country and study
+    samples_per_country_and_study = (
+        dataset.groupby(["Country", "Study"]).size().unstack().fillna(0)
+    )
+    figure.add_bar_plot_stacked(samples_per_country_and_study)
