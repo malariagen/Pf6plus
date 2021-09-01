@@ -18,13 +18,13 @@ class DrugResistancePrevalence:
 
     def count_phenotypes_for_drug(self, data):
         try:
-            resistant = len(data.loc[data[self.drug] == 'Resistant'])
-            sensitive = len(data.loc[data[self.drug] == 'Sensitive'])
-            undetermined = len(data.loc[data[self.drug] == 'Undetermined'])
-        except: 
-            return 0,0,0
+            resistant = len(data.loc[data[self.drug] == "Resistant"])
+            sensitive = len(data.loc[data[self.drug] == "Sensitive"])
+            undetermined = len(data.loc[data[self.drug] == "Undetermined"])
+        except:
+            return 0, 0, 0
         return resistant, sensitive, undetermined
-    
+
     def count_phenotypes_per_year(self, data):
         phenotypes = (
             data.groupby(["Year", self.drug]).size().unstack().fillna(0).astype(int)
@@ -72,8 +72,8 @@ def plot_dr_prevalence(
     Returns:
       A series of plots (one per drug) showing the prevalence of resistant variants the drug/country/year (or) drug/country/year combination provided.
     """
-#     if not isinstance(drugs, list):
-#         raise ValueError('Drugs parameter must be a list.')
+    #     if not isinstance(drugs, list):
+    #         raise ValueError('Drugs parameter must be a list.')
     population = set_population(population, data, country)
 
     data = filter_years(data, years, bin)
@@ -143,10 +143,10 @@ def plot_dr_prevalence(
     figure.plot_figure_grid()
 
 
-def count_phenotypes_for_list_of_drugs(drugs,data):
-    resistant=[]
-    sensitive=[]
-    undetermined=[]
+def count_phenotypes_for_list_of_drugs(drugs, data):
+    resistant = []
+    sensitive = []
+    undetermined = []
     for drug in drugs:
         d = DrugResistancePrevalence(drug)
         res, sens, undet = d.count_phenotypes_for_drug(data)
@@ -155,15 +155,40 @@ def count_phenotypes_for_list_of_drugs(drugs,data):
         undetermined.append(undet)
     return resistant, sensitive, undetermined
 
+
 def plot_phenotype_bar_chart_compared_to_pf6plus(dataset, pf6plus):
     figure = Subplots(colours=True)
-    
-    #For results from grc 
-    drugs = ['Artemisinin', 'Chloroquine', 'DHA-PPQ', 'Piperaquine', 'Pyrimethamine', 'SP', 'S-P-IPTp', 'Sulfadoxine']
-    pf6plus_drugs = ['Artemisinin', 'Chloroquine', 'DHA-PPQ', 'Piperaquine', 'Pyrimethamine', 'S-P', 'S-P-IPTp', 'Sulfadoxine']
-    
-    resistant, sensitive, undetermined = count_phenotypes_for_list_of_drugs(drugs, dataset)
-    figure.add_bar_plot(0, drugs,resistant, sensitive, undetermined, "GRC Phenotypes")
-    resistant, sensitive, undetermined = count_phenotypes_for_list_of_drugs(pf6plus_drugs, pf6plus)
-    figure.add_bar_plot(1, pf6plus_drugs,resistant, sensitive, undetermined, "Pf6+ Phenotypes")
+
+    # For results from grc
+    drugs = [
+        "Artemisinin",
+        "Chloroquine",
+        "DHA-PPQ",
+        "Piperaquine",
+        "Pyrimethamine",
+        "SP",
+        "S-P-IPTp",
+        "Sulfadoxine",
+    ]
+    pf6plus_drugs = [
+        "Artemisinin",
+        "Chloroquine",
+        "DHA-PPQ",
+        "Piperaquine",
+        "Pyrimethamine",
+        "S-P",
+        "S-P-IPTp",
+        "Sulfadoxine",
+    ]
+
+    resistant, sensitive, undetermined = count_phenotypes_for_list_of_drugs(
+        drugs, dataset
+    )
+    figure.add_bar_plot(0, drugs, resistant, sensitive, undetermined, "GRC Phenotypes")
+    resistant, sensitive, undetermined = count_phenotypes_for_list_of_drugs(
+        pf6plus_drugs, pf6plus
+    )
+    figure.add_bar_plot(
+        1, pf6plus_drugs, resistant, sensitive, undetermined, "Pf6+ Phenotypes"
+    )
     figure.plot_figure_grid()

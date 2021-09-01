@@ -41,7 +41,7 @@ class Subplots:
     def plot_subplot(self, plot_i, dataframe, title):
         figure = bokeh.plotting.figure(
             title=title,
-            x_range=(2001,2019),
+            x_range=(2001, 2019),
             y_range=(0, 1),
             plot_width=1500,
             plot_height=300,
