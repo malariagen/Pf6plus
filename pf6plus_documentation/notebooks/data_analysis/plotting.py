@@ -139,7 +139,7 @@ class Subplots:
         self.figures.append(figure)
         return figure
 
-    def add_bar_plot_stacked(self, dataframe, stack, x_range):
+    def add_bar_plot_stacked(self, dataframe, stack, title, x_range):
         # Convert input to correct format
         data = dataframe.to_dict("list")
         data[stack] = list(dataframe.index)
@@ -148,7 +148,7 @@ class Subplots:
         # Plot
         figure = bokeh.plotting.figure(
             x_range=x_range,
-            title="Studies contributing to Pf6+ across countries",
+            title=title,
             toolbar_location="above",
             tools="pan,wheel_zoom,box_zoom,reset,tap",
             active_scroll="wheel_zoom",
@@ -174,7 +174,7 @@ class Subplots:
         figure.add_tools(hover)
         figure.xgrid.grid_line_color = None
         figure.xaxis.major_label_orientation = pi / 4
-        figure.xaxis.axis_label = "Countries"
+        figure.xaxis.axis_label = stack
         figure.yaxis.axis_label = "# of samples"
         bokeh.plotting.show(figure)
 
