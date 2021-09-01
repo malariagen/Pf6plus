@@ -1,21 +1,12 @@
-import math
-import matplotlib.pyplot as plt
 import matplotlib.colors as mcolors
-import numpy as np
-import panel as pn
 
 # Bokeh Libraries
 import numpy as np
 import bokeh.plotting
-import bokeh.models
-import bokeh.layouts
-import bokeh.io
-import bokeh.palettes
-import pandas as pd
 from bokeh.layouts import gridplot
 from bokeh.models import ColumnDataSource, HoverTool
-from bokeh.palettes import Category10, Accent, Dark2, Turbo256
-import itertools
+
+from bokeh.palettes import Category10, Accent, Dark2, inferno
 from bokeh.transform import dodge
 from math import pi
 
@@ -30,7 +21,7 @@ class Subplots:
         self.colours = colours
         if self.colours:
             self.colour_code_dict = {}
-            self.colour_options = Category10[10] + Accent[8] + Dark2[8] + Turbo256
+            self.colour_options = Category10[10] + Accent[8] + Dark2[8] + inferno(40)
 
     def add_colour_to_dictionary(self, new_key):
         if new_key not in self.colour_code_dict:
@@ -41,7 +32,7 @@ class Subplots:
     def plot_subplot(self, plot_i, dataframe, title):
         figure = bokeh.plotting.figure(
             title=title,
-            x_range=(2001,2019),
+            x_range=(2001, 2019),
             y_range=(0, 1),
             plot_width=1500,
             plot_height=300,
@@ -134,6 +125,7 @@ class Subplots:
         hover = HoverTool()
         hover.tooltips = """
         <div>
+            <div></strong>$name</div>
             <div><strong>Count: </strong>@$name</div>
         </div>"""
         figure.add_tools(hover)
@@ -146,6 +138,45 @@ class Subplots:
         figure.yaxis.axis_label = "# of samples"
         self.figures.append(figure)
         return figure
+
+    def add_bar_plot_stacked(self, dataframe, stack, title, x_range):
+        # Convert input to correct format
+        data = dataframe.to_dict("list")
+        data[stack] = list(dataframe.index)
+        studies = list(dataframe.columns)
+
+        # Plot
+        figure = bokeh.plotting.figure(
+            x_range=x_range,
+            title=title,
+            toolbar_location="above",
+            tools="pan,wheel_zoom,box_zoom,reset,tap",
+            active_scroll="wheel_zoom",
+            active_drag="pan",
+        )
+
+        figure.vbar_stack(
+            studies,
+            x=stack,
+            name=studies,
+            line_color="black",
+            width=0.9,
+            source=data,
+            color=self.colour_options[: len(studies)],
+        )
+
+        hover = HoverTool()
+        hover.tooltips = """
+        <div>
+            <div></strong>$name</div>
+            <div><strong>Count: </strong>@$name</div>
+        </div>"""
+        figure.add_tools(hover)
+        figure.xgrid.grid_line_color = None
+        figure.xaxis.major_label_orientation = pi / 4
+        figure.xaxis.axis_label = stack
+        figure.yaxis.axis_label = "# of samples"
+        bokeh.plotting.show(figure)
 
     def fill_figure_grid(self):
         if (len(self.figures) % 2) != 0:
