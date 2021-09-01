@@ -1,27 +1,14 @@
-import math
-import matplotlib.pyplot as plt
 import matplotlib.colors as mcolors
-import numpy as np
-
-# import panel as pn
 
 # Bokeh Libraries
 import numpy as np
 import bokeh.plotting
-import bokeh.models
-import bokeh.layouts
-import bokeh.io
-import bokeh.palettes
-import pandas as pd
 from bokeh.layouts import gridplot
 from bokeh.models import ColumnDataSource, HoverTool
 
 from bokeh.palettes import Category10, Accent, Dark2, inferno
-import itertools
 from bokeh.transform import dodge
 from math import pi
-
-# from bokeh._legacy_charts import Bar
 
 
 class Subplots:
@@ -152,16 +139,15 @@ class Subplots:
         self.figures.append(figure)
         return figure
 
-    def add_bar_plot_stacked(self, dataframe):
+    def add_bar_plot_stacked(self, dataframe, stack, x_range):
         # Convert input to correct format
         data = dataframe.to_dict("list")
-        data["Countries"] = list(dataframe.index)
+        data[stack] = list(dataframe.index)
         studies = list(dataframe.columns)
 
         # Plot
-
         figure = bokeh.plotting.figure(
-            x_range=data["Countries"],
+            x_range=x_range,
             title="Studies contributing to Pf6+ across countries",
             toolbar_location="above",
             tools="pan,wheel_zoom,box_zoom,reset,tap",
@@ -171,7 +157,7 @@ class Subplots:
 
         figure.vbar_stack(
             studies,
-            x="Countries",
+            x=stack,
             name=studies,
             line_color="black",
             width=0.9,
@@ -182,12 +168,10 @@ class Subplots:
         hover = HoverTool()
         hover.tooltips = """
         <div>
-            <div><strong>Country: </strong>$name</div>
+            <div></strong>$name</div>
             <div><strong>Count: </strong>@$name</div>
         </div>"""
         figure.add_tools(hover)
-
-        figure.x_range.range_padding = 0.1
         figure.xgrid.grid_line_color = None
         figure.xaxis.major_label_orientation = pi / 4
         figure.xaxis.axis_label = "Countries"
@@ -213,12 +197,3 @@ def assign_variables_colours(variables):
     )
     variable_colours = {keys[i]: colour_options[i] for i in range(len(keys))}
     return variable_colours
-
-
-def plot_samples_per_country_and_study(dataset):
-    figure = Subplots(colours=True)
-    # Find samples per country and study
-    samples_per_country_and_study = (
-        dataset.groupby(["Country", "Study"]).size().unstack().fillna(0)
-    )
-    figure.add_bar_plot_stacked(samples_per_country_and_study)
