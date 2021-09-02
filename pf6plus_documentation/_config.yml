@@ -7,7 +7,7 @@ execute:
 repository:    
   url: https://github.com/malariagen/Pf6plus
   path_to_book              : notebooks
-  branch                    : add_jupyter_notebooks
+  branch                    : master
 launch_buttons:
   notebook_interface: "jupyterlab"
   colab_url: "https://colab.research.google.com"
