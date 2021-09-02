@@ -1,20 +1,17 @@
 # -*- coding: utf-8 -*-
 import numpy as np
-import warnings
-import pandas as pd 
 
 # import plotting libraries
-import matplotlib.pyplot as plt
-import matplotlib.colors as mcolors
-import cartopy
-import geopandas
-import cartopy.crs as ccrs
-from cartopy.io import shapereader
 import folium
 from folium.plugins import MarkerCluster
 
 from data_analysis.plotting import assign_variables_colours
-from data_analysis.filtering import filter_WGS_data, filter_non_WGS_data, find_studies_at_coord, find_samples_per_location 
+from data_analysis.filtering import (
+    filter_WGS_data,
+    filter_non_WGS_data,
+    find_studies_at_coord,
+    find_samples_per_location,
+)
 
 
 def filter_data_for_mapping(data, data_subset):
@@ -43,20 +40,17 @@ def set_colours_for_individual_sites(data, individual_sites):
     return data
 
 
-
 class GeoPlotMap:
 
     """Functions to plot map"""
 
-    def __init__(
-        self,
-        zoom_to_start=2, 
-        location_to_start=[13.1339, 16.1039]
-    ):
-        self.zoom_to_start=zoom_to_start
-        self.location_to_start=location_to_start
+    def __init__(self, zoom_to_start=2, location_to_start=[13.1339, 16.1039]):
+        self.zoom_to_start = zoom_to_start
+        self.location_to_start = location_to_start
         self.my_map = folium.Map(
-            location=self.location_to_start, zoom_start=self.zoom_to_start, tiles="cartodb positron"
+            location=self.location_to_start,
+            zoom_start=self.zoom_to_start,
+            tiles="cartodb positron",
         )
         url = "https://raw.githubusercontent.com/python-visualization/folium/master/examples/data"
         self.country_shapes = f"{url}/world-countries.json"
@@ -73,49 +67,57 @@ class GeoPlotMap:
             fill_opacity=0.4,
             line_opacity=0.2,
             legend_name="Number of Samples",
-            threshold_scale=[0, 500, 1000, 1500, 2000, 2500]
+            threshold_scale=[0, 500, 1000, 1500, 2000, 2500],
         ).add_to(self.my_map)
         return self.my_map
-    
+
     def add_marker_to_cluster(self, cluster, lat, long, country, n_samples, studies):
         folium.Marker(
-                location=[lat, long],
-                popup=folium.map.Popup(
+            location=[lat, long],
+            popup=folium.map.Popup(
+                (
                     (
-                        (
-                            "Country: {} <br>"
-                            "Samples: {} <br>"
-                            "Studies: <br> {} <br>"
-                        ).format(country, n_samples, "<br>".join(studies))
-                    ),
-                    max_width=450,
+                        "Country: {} <br>" "Samples: {} <br>" "Studies: <br> {} <br>"
+                    ).format(country, n_samples, "<br>".join(studies))
                 ),
-                tooltip=country,
-            ).add_to(cluster)
-        
+                max_width=450,
+            ),
+            tooltip=country,
+        ).add_to(cluster)
+
     def add_cluster_to_map(self):
         cluster = MarkerCluster().add_to(self.my_map)
         return cluster
 
 
-def map_samples(data, data_subset=None,zoom_to_start=2,location=[13.1339, 16.1039]):
+def map_samples(data, data_subset=None, zoom_to_start=2, location=[13.1339, 16.1039]):
     data, label = filter_data_for_mapping(data, data_subset)
-    #Count samples per country
-    samples_per_country = data.groupby(['Country']).size().reset_index().rename(columns={0:'Samples'})
-    mapper = GeoPlotMap(zoom_to_start=zoom_to_start,location_to_start=location)
+    # Count samples per country
+    samples_per_country = (
+        data.groupby(["Country"]).size().reset_index().rename(columns={0: "Samples"})
+    )
+    mapper = GeoPlotMap(zoom_to_start=zoom_to_start, location_to_start=location)
     my_map = mapper.fill_in_countries(samples_per_country)
 
     # for each country create a cluster
     for country in np.unique(data.Country):
-        #add marker cluster
+        # add marker cluster
         country_cluster = mapper.add_cluster_to_map()
         country_data = data.loc[data.Country == country]
-        #samples per location 
+        # samples per location
         samples_per_location = find_samples_per_location(country_data)
         for _, location in samples_per_location.iterrows():
-            #Studies for site
-            studies = find_studies_at_coord(country_data, location["Latitude_adm1"],location["Longitude_adm1"])
-            #Add marker to country cluster 
-            mapper.add_marker_to_cluster(country_cluster, location["Latitude_adm1"], location["Longitude_adm1"], country, int(location.Samples), studies)
+            # Studies for site
+            studies = find_studies_at_coord(
+                country_data, location["Latitude_adm1"], location["Longitude_adm1"]
+            )
+            # Add marker to country cluster
+            mapper.add_marker_to_cluster(
+                country_cluster,
+                location["Latitude_adm1"],
+                location["Longitude_adm1"],
+                country,
+                int(location.Samples),
+                studies,
+            )
     return my_map
-
