@@ -33,7 +33,10 @@ def plot_temporal_samples_histogram(dataset):
         process_and_year_count[["Pf6", "GenRe-Mekong"]],
         "Year",
         "Year of Collection for Samples in Pf6 and GenRe-Mekong",
-        (min(process_and_year_count.index), max(process_and_year_count.index)),
+        (
+            min(process_and_year_count.index) - 0.5,
+            max(process_and_year_count.index) + 0.5,
+        ),
     )
 
 
@@ -46,5 +49,8 @@ def plot_temporal_samples_grouped_by_study_histogram(dataset):
         grouped_by_year_and_study,
         "Year",
         "Studies Contributing to Pf6+ Across Years",
-        (min(grouped_by_year_and_study.index), max(grouped_by_year_and_study.index)),
+        (
+            min(grouped_by_year_and_study.index) - 0.5,
+            max(grouped_by_year_and_study.index) + 0.5,
+        ),
     )
