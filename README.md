@@ -48,16 +48,7 @@ source pf6plus_notebooks_env/bin/activate
 
 2. Install the dependencies in the virtual environment
 
-```
-pip uninstall -q -y shapely #if using locally, you need to uninstall other shapely versions first
-
-pip uninstall -q -y imgaug # uninstalling other 'imgaug' versions due to colab incompatibility
-pip install imgaug==0.2.5
-
-!pip install -q shapely --no-binary shapely \
-                                    cartopy \
-                                    geopandas \
-```
+**Need to check what needs to be installed : bokeh and folium**
 
 **_Cloning the repo_**
 
