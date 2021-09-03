@@ -53,7 +53,7 @@ class GeoPlotMap:
             tiles="cartodb positron",
         )
         url = "https://raw.githubusercontent.com/python-visualization/folium/master/examples/data"
-        self.country_shapes = f"{url}/world-countries.json"
+        self.country_shapes = ("{}/world-countries.json").format(url)
 
     def fill_in_countries(self, samples_per_country):
         folium.Choropleth(
