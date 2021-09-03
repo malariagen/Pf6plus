@@ -10,6 +10,21 @@ For further information, please see the [Pf6+ data user guide](https://malariage
 
 If you find a bug with any public data or documentation, please raise an issue on this repo.
 
+## Contents
+  * [Pf6+ Documentation](#Pf6+-Documentation)
+    * [Viewing the Documentation](#Viewing-the-Documentation)
+    * [Running the Code in Colab](#Running-the-Code-in-Colab)
+    * [Running the Notebooks Locally](#)
+      * [Dependencies](#)
+      * [How to Install Python Modules in a Virtual Environment](#)
+      * [Cloning the repo](#)
+      * [Running Jupyter](#)
+  * [Documentation for Developers](#)
+    * [Deployment](#)
+    * [Making changes to the notebooks](#)
+    * [Data Analysis](#)
+    * [Developing on JupyterLab on the Farm](#)
+
 ## Pf6+ Documentation
 
 Included in the `pf6plus_documentation` directory in this repository is a set of notebooks. They are a guide to using the Pf6+ dataset.
@@ -44,7 +59,7 @@ To run the notebooks on your own machine you will need to clone this repository 
 - bokeh
 - pandas
 
-#### How to Install Python Modules in a Virtual Environment 
+#### How to Install Python Modules in a Virtual Environment
 
 Running this notebook on your own machine requires Python packages to be installed. We recommend doing this in a virtual environment. 
 Open a terminal and follow these instructions:
@@ -75,7 +90,7 @@ If you want to enter the environment again you won't need to install anything ag
 source pf6plus_notebooks_env/bin/activate
 ```
 
-**_Cloning the repo_**
+#### Cloning the repo
 
 You will then need to clone this repository to your own machine. Navigate to where you would like to store this and run the following command:
 
@@ -83,7 +98,7 @@ You will then need to clone this repository to your own machine. Navigate to whe
 git clone https://gitlab.com/malariagen/gsp/pf6plus.git
 ```
 
-**_Running Jupyter_**
+#### Running Jupyter
 
 To launch Jupyter Notebook simply navigate to where you cloned this repo and run the following:
 
@@ -92,7 +107,7 @@ cd notebooks
 jupyter-notebook
 ```
 
-## Developing the Documentation
+## Documentation for Developers
 
 The documentation is a set of Jupyter Notebooks contained in the `pf6plus_documentation/notebooks/` directory.
 
