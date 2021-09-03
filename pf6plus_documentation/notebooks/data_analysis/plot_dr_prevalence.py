@@ -167,7 +167,7 @@ def plot_phenotype_bar_chart_compared_to_pf6plus(dataset, pf6plus):
         "Piperaquine",
         "Pyrimethamine",
         "SP",
-        "S-P-IPTp",
+        "SP-IPTp",
         "Sulfadoxine",
     ]
     pf6plus_drugs = [
