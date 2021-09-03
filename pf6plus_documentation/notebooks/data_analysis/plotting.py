@@ -71,7 +71,6 @@ class Subplots:
 
     def add_bar_plot(self, plot_i, drugs, resistant, sensitive, undetermined, title):
 
-        drugs = sorted(drugs)
         data = {
             "drugs": drugs,
             "resistant": resistant,
