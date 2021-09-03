@@ -10,6 +10,21 @@ For further information, please see the [Pf6+ data user guide](https://malariage
 
 If you find a bug with any public data or documentation, please raise an issue on this repo.
 
+## Contents
+  * [Pf6+ Documentation](#Pf6-Documentation)
+    * [Viewing the Documentation](#Viewing-the-Documentation)
+    * [Running the Code in Colab](#Running-the-Code-in-Colab)
+    * [Running the Notebooks Locally](#Running-the-Notebooks-Locally)
+      * [Dependencies](#Dependencies)
+      * [How to Install Python Modules in a Virtual Environment](#How-to-Install-Python-Modules-in-a-Virtual-Environment)
+      * [Cloning the Repository](#Cloning-the-Repository)
+      * [Running Jupyter](#Running-Jupyter)
+  * [Documentation for Developers](#Documentation-for-Developers)
+    * [Deployment](#Deployment)
+    * [Making Changes to the Notebooks](#Making-Changes-to-the-Notebooks)
+    * [Data Analysis](#Data-Analysis)
+    * [Developing on JupyterLab on the Farm](#Developing-on-JupyterLab-on-the-Farm)
+
 ## Pf6+ Documentation
 
 Included in the `pf6plus_documentation` directory in this repository is a set of notebooks. They are a guide to using the Pf6+ dataset.
@@ -44,7 +59,7 @@ To run the notebooks on your own machine you will need to clone this repository 
 - bokeh
 - pandas
 
-#### How to Install Python Modules in a Virtual Environment 
+#### How to Install Python Modules in a Virtual Environment
 
 Running this notebook on your own machine requires Python packages to be installed. We recommend doing this in a virtual environment. 
 Open a terminal and follow these instructions:
@@ -75,7 +90,7 @@ If you want to enter the environment again you won't need to install anything ag
 source pf6plus_notebooks_env/bin/activate
 ```
 
-**_Cloning the repo_**
+#### Cloning the Repository
 
 You will then need to clone this repository to your own machine. Navigate to where you would like to store this and run the following command:
 
@@ -83,7 +98,7 @@ You will then need to clone this repository to your own machine. Navigate to whe
 git clone https://gitlab.com/malariagen/gsp/pf6plus.git
 ```
 
-**_Running Jupyter_**
+#### Running Jupyter
 
 To launch Jupyter Notebook simply navigate to where you cloned this repo and run the following:
 
@@ -92,7 +107,7 @@ cd notebooks
 jupyter-notebook
 ```
 
-## Developing the Documentation
+## Documentation for Developers
 
 The documentation is a set of Jupyter Notebooks contained in the `pf6plus_documentation/notebooks/` directory.
 
@@ -106,7 +121,7 @@ The configuration for the Jupyter Book is set up in the `pf6plus_documentation/`
 - **\_toc.yml** : configures the layout for the different sections of the book.
 - **landing-page.md** : formats the landing page for opening the book.
 
-### Making changes to the notebooks
+### Making Changes to the Notebooks
 
 Make any changes you wish to make on a branch.
 You should test these changes locally before merging them into the master branch. You will need jupyter-book installed to do this, you can install this with `pip` if you do not already have it.
