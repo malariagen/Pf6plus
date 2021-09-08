@@ -9,10 +9,10 @@ For further information, please see the [Pf6+ data user guide](https://malariage
 If you find a bug related to usage, public data or documentation, please raise an issue on this repository.
 
 ## Contents
-  * [Data Resource](#Data Resource)
-  * [Accesing the Analysis Examples](#Accesing the Analysis Examples)
-  * [Running the Notebooks Locally](#Running-the-Notebooks-Locally)
-  * [Running the Notebooks Locally](#Running-the-Notebooks-Locally)
+  * [Data Resource](#Data-Resource)
+  * [Accesing the Analysis Examples](#Accesing-the-Analysis-Examples)
+  * [Running the Notebooks (Google Colab](#Running-the-Notebooks-(Google-Colab))
+  * [Running the Notebooks (Locally)](#Running-the-Notebooks-(Locally))
     * [Dependencies](#Dependencies)
     * [How to Install Python Modules in a Virtual Environment](#How-to-Install-Python-Modules-in-a-Virtual-Environment)
     * [Cloning the Repository](#Cloning-the-Repository)
@@ -38,13 +38,13 @@ We suggest exploring the Notebooks on this order.
 
 You can view the documentation [here](https://malariagen.github.io/Pf6plus/). The notebooks and output plots are interactive, allowing to explore the different dimensions of the dataset, and to visualise specific data points (e.g. by hovering and zooming in and out using the tool bar).
 
-### Running the code in Google Colab
+### Running the Notebooks (Google Colab)
 
-The suggested way to interact with the resource is to open the notebooks in Google Colab, this will allow you to run code and change parameters, without any need for local installations. To do this open the [documentation](https://malariagen.github.io/Pf6plus/) and select the notebook you would like to open. Click on the rocket icon in the top right hand corner and select `Colab`, as shown below.
+The suggested way to use the resource is to open the notebooks in Google Colab, this will allow you to run code and change parameters, without any need for local installations. To do this open the [documentation](https://malariagen.github.io/Pf6plus/) and select the notebook you would like to open. Click on the rocket icon in the top right hand corner and select `Colab`, as shown below.
 
 !["Open colab](pf6plus_documentation/images/open_colab.png)
 
-### Running the Notebooks Locally
+### Running the Notebooks (Locally)
 
 To run the notebooks on your own computer you will need to clone this repository and install the following dependencies: 
 
