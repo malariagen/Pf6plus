@@ -98,20 +98,27 @@ def plot_haplotype_frequency(
     years=None,
     bin=False,
 ):
-    """Tabulate the frequency of top n haplotypes on a specific gene per country (or) population per year
+    
+    
+    """
+    Plot the top n haplotypes on a specife gene per country (or) population per year
 
     Parameters:
       - gene: Any of the genes in the Pf6+ dataframe ['PfCRT', 'Kelch', 'PfDHFR', 'PfEXO', 'PGB', 'Plasmepsin2/3', 'PfDHPS', 'PfMDR1']
-      - num_top_haplotypes: The (n) most common haplotypes, default is 5. These excludes missing haplotypes.
-      - countries: Any of the countries in the Pf6+ dataframe (if specified, population value is not used) ['Bangladesh', 'Benin', 'Burkina Faso', 'Cambodia', 'Cameroon', 'Colombia', 'Congo DR', 'Ethiopia', 'Gambia', 'Ghana', 'Guinea', 'India', 'Indonesia', 'Ivory Coast', 'Kenya', 'Laos', 'Madagascar', 'Malawi', 'Mali', 'Mauritania', 'Mozambique', 'Myanmar', 'Nigeria', 'Papua New Guinea', 'Peru', 'Senegal', 'Tanzania', 'Thailand', 'Uganda', 'Viet Nam']
-      - populations: Any of the populations in the Pf6+ dataframe ['CAF', 'EAF', 'ESEA', 'OCE', 'SAM', 'SAS', 'WAF', 'WSEA']
-      - years: Any/list of the years in the Pf6+ dataframe [2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019]
+      - country: Any of the countries in the Pf6+ dataframe (if specified, population value is not used) ['Bangladesh', 'Benin', 'Burkina Faso', 'Cambodia', 'Cameroon',
+       'Colombia', "Côte d'Ivoire", 'Democratic Republic of the Congo',
+       'Ethiopia', 'Gambia', 'Ghana', 'Guinea', 'India', 'Indonesia',
+       'Kenya', 'Laos', 'Madagascar', 'Malawi', 'Mali', 'Mauritania',
+       'Mozambique', 'Myanmar', 'Nigeria', 'Papua New Guinea', 'Peru',
+       'Senegal', 'Tanzania', 'Thailand', 'Uganda', 'Vietnam']
+      - population: Any of the populations in the Pf6+ dataframe ['CAF', 'EAF', 'ESEA', 'OCE', 'SAM', 'SAS', 'WAF', 'WSEA']
+      - year: Any/list of the years in the Pf6+ dataframe [2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019]
       - bin: If True, all the years between the specified values will be used. If False, individual years are used.
-      - threshold: To increase confidence on disperse data, only use country (or) population/year combinations with n_samples>threshold (default=25, must be greater than 0)
+      - threshold: To increase confidence on disperse data, only use country (or) population/year combinations with n_samples>threshold (default=25)
+
     Returns:
-      A dataframe showing the number of Resistant, Sensitive & Undetermined
-      samples using the drug/country/year (or) drug/country/year combination provided. The total number
-      of samples and drug resistant frequency is also provided.
+      A series of plots (one per gene) showing the frequency of the top n haplotypes the drug/country/year (or) drug/country/year combination provided. Haplotypes outside the top n, are showed as part of the `Other` category. 
+    
     """
     loc, filters = define_filters(countries, populations)
     nfilters = len(filters)
