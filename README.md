@@ -2,6 +2,8 @@
 
 # `Pf6+` - an integrated open data resource of whole-genome sequenced and targeted genotyped Plasmodium falciparum samples
 
+The Pf6+ data resource builds on the efforts of the Pf6 project (https://wellcomeopenresearch.org/articles/6-42/v1) and the GenRe project (https://www.malariagen.net/resource/29); integrating 5,970 WGS samples together with 7,626 Amplicon Sequencing samples. We aim to provide a series of use cases, together with the tools to interact with them, to increase the accessibility of the resource.
+
 This repository provides technical documentation for Pf6+, including access to the data resource and accompanying Jupyter Notebooks.
 
 For further information, please see the [Pf6+ data user guide](https://malariagen.github.io/Pf6plus/).
