@@ -3,6 +3,7 @@ root: landing-page
 parts:
   - caption: Pf6+ 
     chapters:
-    - file: notebooks/1_partners_270921.ipynb
-    - file: notebooks/2_prevalence_DR_haps_270921.ipynb
-    - file: notebooks/3_phenotyper.ipynb
+    - file: notebooks/1_partners.ipynb
+    - file: notebooks/2_genetic_barcode.ipynb
+    - file: notebooks/3_variants_prevalence.ipynb
+    - file: notebooks/4_phenotyper.ipynb
