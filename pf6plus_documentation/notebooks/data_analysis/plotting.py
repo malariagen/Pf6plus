@@ -66,7 +66,8 @@ class Subplots:
             )
         figure.xaxis.axis_label = "Year"
         figure.yaxis.axis_label = "Prevalence"
-        figure.add_layout(Title(text=sub_title), "above")
+        if sub_title:
+            figure.add_layout(Title(text=sub_title), "above")
         figure.legend.background_fill_alpha = 0.7
         self.figures.append(figure)
         return figure
