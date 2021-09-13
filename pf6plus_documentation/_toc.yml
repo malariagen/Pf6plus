@@ -4,5 +4,5 @@ parts:
   - caption: Pf6+ 
     chapters:
     - file: notebooks/1_partners.ipynb
-    - file: notebooks/2_prevalence_DR_haps.ipynb
+    - file: notebooks/2_variants_prevalence.ipynb
     - file: notebooks/3_phenotyper.ipynb

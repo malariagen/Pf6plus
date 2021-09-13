@@ -63,7 +63,12 @@ def plot_dr_prevalence(
 
     Parameters:
       - drug: Any/list of the drugs in the Pf6+ dataframe ['Artemisinin', 'Chloroquine', 'DHA-PPQ', 'Piperaquine', 'Pyrimethamine', 'S-P', 'S-P-IPTp', 'Sulfadoxine']
-      - country: Any of the countries in the Pf6+ dataframe (if specified, population value is not used) ['Bangladesh', 'Benin', 'Burkina Faso', 'Cambodia', 'Cameroon', 'Colombia', 'Congo DR', 'Ethiopia', 'Gambia', 'Ghana', 'Guinea', 'India', 'Indonesia', 'Ivory Coast', 'Kenya', 'Laos', 'Madagascar', 'Malawi', 'Mali', 'Mauritania', 'Mozambique', 'Myanmar', 'Nigeria', 'Papua New Guinea', 'Peru', 'Senegal', 'Tanzania', 'Thailand', 'Uganda', 'Viet Nam']
+      - country: Any of the countries in the Pf6+ dataframe (if specified, population value is not used) ['Bangladesh', 'Benin', 'Burkina Faso', 'Cambodia', 'Cameroon',
+       'Colombia', "Côte d'Ivoire", 'Democratic Republic of the Congo',
+       'Ethiopia', 'Gambia', 'Ghana', 'Guinea', 'India', 'Indonesia',
+       'Kenya', 'Laos', 'Madagascar', 'Malawi', 'Mali', 'Mauritania',
+       'Mozambique', 'Myanmar', 'Nigeria', 'Papua New Guinea', 'Peru',
+       'Senegal', 'Tanzania', 'Thailand', 'Uganda', 'Vietnam']
       - population: Any of the populations in the Pf6+ dataframe ['CAF', 'EAF', 'ESEA', 'OCE', 'SAM', 'SAS', 'WAF', 'WSEA']
       - year: Any/list of the years in the Pf6+ dataframe [2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019]
       - bin: If True, all the years between the specified values will be used. If False, individual years are used.
