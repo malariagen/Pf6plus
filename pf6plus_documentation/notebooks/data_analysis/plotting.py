@@ -4,7 +4,7 @@ import matplotlib.colors as mcolors
 import numpy as np
 import bokeh.plotting
 from bokeh.layouts import gridplot
-from bokeh.models import ColumnDataSource, HoverTool
+from bokeh.models import ColumnDataSource, HoverTool, Title
 
 from bokeh.palettes import Category10, Accent, Dark2, inferno
 from bokeh.transform import dodge
@@ -29,7 +29,7 @@ class Subplots:
                 len(self.colour_code_dict)
             ]
 
-    def plot_subplot(self, plot_i, dataframe, title):
+    def plot_subplot(self, plot_i, dataframe, title, sub_title=None):
         figure = bokeh.plotting.figure(
             title=title,
             x_range=(2001, 2019),
@@ -66,12 +66,13 @@ class Subplots:
             )
         figure.xaxis.axis_label = "Year"
         figure.yaxis.axis_label = "Prevalence"
+        if sub_title:
+            figure.add_layout(Title(text=sub_title), "above")
         figure.legend.background_fill_alpha = 0.7
         self.figures.append(figure)
         return figure
 
     def add_bar_plot(self, plot_i, drugs, resistant, sensitive, undetermined, title):
-
         data = {
             "drugs": drugs,
             "resistant": resistant,
