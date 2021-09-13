@@ -66,6 +66,7 @@ class Subplots:
             )
         figure.xaxis.axis_label = "Year"
         figure.yaxis.axis_label = "Prevalence"
+        figure.legend.background_fill_alpha = 0.7
         self.figures.append(figure)
         return figure
 
@@ -132,6 +133,7 @@ class Subplots:
         figure.xgrid.grid_line_color = None
         figure.legend.location = "top_left"
         figure.legend.orientation = "horizontal"
+        figure.legend.background_fill_alpha = 0.7
         figure.xaxis.major_label_orientation = pi / 4
         figure.xaxis.axis_label = "Drugs"
         figure.yaxis.axis_label = "# of samples"
