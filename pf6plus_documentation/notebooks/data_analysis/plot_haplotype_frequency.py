@@ -63,13 +63,15 @@ class FindTopHaplotypes:
         )
         return frequencies_of_top_n_haps
 
+
 def check_list(l):
     if not isinstance(l, list):
-        raise ValueError("{} must be in a list. e.g. ['{}']".format(l,l))
+        raise ValueError("{} must be in a list. e.g. ['{}']".format(l, l))
+
 
 def define_filters(country, population):
     if country:
-#         check_list(country)
+        #         check_list(country)
         loc = "Country"
         filters = country
         if population:
@@ -77,7 +79,7 @@ def define_filters(country, population):
                 "WARNING: both population and country specified, will only filter by country."
             )
     elif population:
-#         check_list(population)
+        #         check_list(population)
         loc = "Population"
         filters = population
 
@@ -126,7 +128,7 @@ def plot_haplotype_frequency(
         samples_subset = filter_countries_and_years_below_threshold(
             locus_year_group, threshold
         )
-        
+
         # Count n haplotypes per year and normalise
         haplotype_finder = FindTopHaplotypes(gene, samples_subset)
         normalised_phenotypes = (

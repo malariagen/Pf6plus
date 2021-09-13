@@ -128,9 +128,11 @@ def plot_dr_prevalence(
         ).sort_index()
 
         # Add subplot
-        title = "{} resistance prevalence in {} from {} to {}".format(
+        title = "{} resistance prevalence in {}".format(
             drug,
             country,
+        )
+        sub_title = "({}-{})".format(
             str(min(prevalences.index)),
             str(max(prevalences.index)),
         )
@@ -138,6 +140,7 @@ def plot_dr_prevalence(
             plot_i,
             prevalences,
             title,
+            sub_title,
         )
         plot_i += 1
     figure.plot_figure_grid()
