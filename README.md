@@ -14,8 +14,8 @@ If you find a bug related to usage, public data or documentation, please raise a
 
 - [Data Resource](#Data-Resource)
 - [Accesing the Analysis Examples](#Accesing-the-Analysis-Examples)
-- [Running the Notebooks (Google Colab)](<#Running-the-Notebooks-(Google-Colab)>)
-- [Running the Notebooks (Locally)](<#Running-the-Notebooks-(Locally)>)
+- [Running the Notebooks (Google Colab)](#Running-the-Notebooks-Google-Colab)
+- [Running the Notebooks (Locally)](#Running-the-Notebooks-Locally)
   - [Dependencies](#Dependencies)
   - [How to Install Python Modules in a Virtual Environment](#How-to-Install-Python-Modules-in-a-Virtual-Environment)
   - [Cloning the Repository](#Cloning-the-Repository)
