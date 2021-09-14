@@ -101,7 +101,7 @@ git clone https://gitlab.com/malariagen/gsp/pf6plus.git
 
 #### Running Jupyter
 
-To launch the notebooks on your own computer you will need to have Jupyter installed. If you don't have this already you can install it using `pip` with the following command:
+To launch the notebooks on your own computer you will need to have Jupyter installed. If you don't have this already, you can install it using `pip` with the following command:
 
 ```
 pip3 install jupyter
