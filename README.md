@@ -44,7 +44,7 @@ You can view the documentation [here](https://malariagen.github.io/Pf6plus/). Th
 
 The suggested way to use the resource is to open the notebooks in Google Colab, this will allow you to run code and change parameters, without any need for local installations. To do this open the [documentation](https://malariagen.github.io/Pf6plus/) and select the notebook you would like to open. Click on the rocket icon in the top right hand corner and select `Colab`, as shown below.
 
-!["Open colab](pf6plus_documentation/images/open_colab.png)
+!["Open colab"](pf6plus_documentation/images/open_colab.png)
 
 ### Running the Notebooks (Locally)
 
@@ -101,12 +101,20 @@ git clone https://gitlab.com/malariagen/gsp/pf6plus.git
 
 #### Running Jupyter
 
+To launch the notebooks on your own computer you will need to have Jupyter installed. If you don't have this already you can install it using `pip` with the following command:
+
+```
+pip3 install jupyter
+```
+
 To launch Jupyter Notebook simply navigate to where you cloned this repo and run the following:
 
 ```
-cd notebooks
+cd pf6plus_documentation/notebooks
 jupyter-notebook
 ```
+
+This should open a web page with the 3 notebooks showing. Simply click on the one you would like to open. We recommend starting with `1_partners.ipynb`.
 
 ## Documentation for Developers
 
