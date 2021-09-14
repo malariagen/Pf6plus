@@ -148,8 +148,9 @@ def plot_haplotype_frequency(
                     filters[i]
                 )
             )
-        # Plot
-        title = "{} Predominant Variants in {}".format(gene, filters[i])
-        colour_code_haps = figure.plot_subplot(i, normalised_phenotypes, title)
+        else:
+            # Plot
+            title = "{} Predominant Variants in {}".format(gene, filters[i])
+            colour_code_haps = figure.plot_subplot(i, normalised_phenotypes, title)
     figure.plot_figure_grid()
     return figure
