@@ -107,7 +107,7 @@ To launch the notebooks on your own computer you will need to have Jupyter insta
 pip3 install jupyter
 ```
 
-To launch Jupyter Notebook simply navigate to where you cloned this repo and run the following:
+To launch Jupyter Notebook simply navigate to where you cloned this repository and run the following:
 
 ```
 cd pf6plus_documentation/notebooks
