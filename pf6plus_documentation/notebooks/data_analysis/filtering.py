@@ -28,7 +28,7 @@ def filter_data_by_country_and_population(
     locus_year_group = pd.DataFrame(
         data.loc[(data["Country"] == country) & (data["Population"] == population)]
     )
-    # Only keep data with country and population matching
+    # Only keep data over threshold
     pf_country = filter_countries_and_years_below_threshold(locus_year_group, threshold)
     return pf_country
 
