@@ -100,8 +100,7 @@ def plot_haplotype_frequency(
     years=None,
     bin=False,
 ):
-    
-    
+
     """
     Plot the top n haplotypes on a specife gene per country (or) population per year
 
@@ -119,8 +118,8 @@ def plot_haplotype_frequency(
       - threshold: To increase confidence on disperse data, only use country (or) population/year combinations with n_samples>threshold (default=25)
 
     Returns:
-      A series of plots (one per gene) showing the frequency of the top n haplotypes the drug/country/year (or) drug/country/year combination provided. Haplotypes outside the top n, are showed as part of the `Other` category. 
-    
+      A series of plots (one per gene) showing the frequency of the top n haplotypes the drug/country/year (or) drug/country/year combination provided. Haplotypes outside the top n, are showed as part of the `Other` category.
+
     """
     loc, filters = define_filters(countries, populations)
     nfilters = len(filters)
@@ -143,8 +142,15 @@ def plot_haplotype_frequency(
                 num_top_haplotypes
             )
         )
-        # Plot
-        title = "{} Predominant Variants in {}".format(gene, filters[i])
-        colour_code_haps = figure.plot_subplot(i, normalised_phenotypes, title)
+        if list(normalised_phenotypes.drop(columns=["Other"]).columns) == []:
+            print(
+                "WARNING: No valid haplotypes found for {}. No plot will be produced.".format(
+                    filters[i]
+                )
+            )
+        else:
+            # Plot
+            title = "{} Predominant Variants in {}".format(gene, filters[i])
+            colour_code_haps = figure.plot_subplot(i, normalised_phenotypes, title)
     figure.plot_figure_grid()
     return figure
