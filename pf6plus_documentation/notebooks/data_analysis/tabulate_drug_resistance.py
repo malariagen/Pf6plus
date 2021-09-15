@@ -4,7 +4,7 @@ from data_analysis.filtering import filter_years
 from data_analysis.plot_dr_prevalence import DrugResistancePrevalence, set_population
 
 
-def tabulate_drug_resistant_2(
+def tabulate_drug_resistant(
     data, drug, country=None, population=None, years=None, bin=False
 ):
 
@@ -28,22 +28,34 @@ def tabulate_drug_resistant_2(
       of samples and drug resistant frequency is also provided.
     """
     # filter years, keeping all if none set
-    data = filter_years(data, years, bin)
+    data_filtered_by_year = filter_years(data, years, bin)
     dr_prev = DrugResistancePrevalence(drug)
 
     if country:
-        population = set_population(population, data, country)
-        data = pd.DataFrame(
-            data.loc[(data["Country"] == country) & (data["Population"] == population)]
+        population = set_population(population, country, data)
+        data_filtered_by_year = pd.DataFrame(
+            data_filtered_by_year.loc[
+                (data_filtered_by_year["Country"] == country)
+                & (data_filtered_by_year["Population"] == population)
+            ]
         )
-        # TODO: if country and population aren't a combo
-        phenotypes = dr_prev.count_phenotypes_per_year(data)
+        # TODO: if no data
+
+        phenotypes = dr_prev.count_phenotypes_per_year(data_filtered_by_year)
     elif population:
-        data = pd.DataFrame(data.loc[(data["Population"] == population)])
-        phenotypes = dr_prev.count_phenotypes_per_year(data)
+        data_filtered_by_year = pd.DataFrame(
+            data_filtered_by_year.loc[
+                (data_filtered_by_year["Population"] == population)
+            ]
+        )
+        phenotypes = dr_prev.count_phenotypes_per_year(data_filtered_by_year)
     else:
         phenotypes = (
-            data.groupby(["Country", drug]).size().unstack().fillna(0).astype(int)
+            data_filtered_by_year.groupby(["Country", drug])
+            .size()
+            .unstack()
+            .fillna(0)
+            .astype(int)
         )
     phenotypes["Total"] = phenotypes.sum(axis=1)
 
