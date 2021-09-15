@@ -41,7 +41,7 @@ class DrugResistancePrevalence:
 
 
 # separate class
-def set_population(population, data, country):
+def set_population(population, country, data):
     if not population:
         populations = list(np.unique(data.loc[(data["Country"] == country)].Population))
         if len(populations) != 1:
@@ -51,7 +51,21 @@ def set_population(population, data, country):
             raise ValueError(error)
         else:
             population = populations[0]
+    else:
+        check_population_country_combo(population, country, data)
     return population
+
+
+def check_population_country_combo(population, country, data):
+    countries = (
+        data.loc[(data["Population"] == population)]["Country"].unique().tolist()
+    )
+    if country not in countries:
+        raise ValueError(
+            "No data available for the country-population combination specified. {} has data for the following countries: {}".format(
+                population, countries
+            )
+        )
 
 
 # Put in separate
@@ -79,15 +93,14 @@ def plot_dr_prevalence(
     """
     #     if not isinstance(drugs, list):
     #         raise ValueError('Drugs parameter must be a list.')
-    population = set_population(population, data, country)
+    population = set_population(population, country, data)
 
-    data = filter_years(data, years, bin)
+    data, years = filter_years(data, years, bin)
     pf_country = filter_data_by_country_and_population(
         data, threshold, country, population
     )
     pf_population = filter_data_by_population(data, threshold, country, population)
 
-    ndrugs = len(drugs)
     figure = Subplots(colours=True)
     plot_i = 0
     for drug in drugs:
