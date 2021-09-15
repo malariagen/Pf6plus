@@ -4,6 +4,25 @@ from data_analysis.filtering import filter_years
 from data_analysis.plot_dr_prevalence import DrugResistancePrevalence, set_population
 
 
+def table_title(drug, country, population, years, bin):
+    message = "{} resistant samples ".format(drug)
+    if country:
+        message = message + "in {}, {} ".format(country, population)
+    elif population:
+        message = message + "in {} ".format(population)
+    if years:
+        if bin:
+            message = message + "between {} and {} ".format(min(years), max(years))
+        else:
+            if len(years) == 1:
+                message = message + "in {} ".format(years[0])
+            else:
+                message = message + "for years {}".format(
+                    ", ".join([str(elem) for elem in years])
+                )
+    return message
+
+
 def tabulate_drug_resistant(
     data, drug, country=None, population=None, years=None, bin=False
 ):
@@ -28,7 +47,8 @@ def tabulate_drug_resistant(
       of samples and drug resistant frequency is also provided.
     """
     # filter years, keeping all if none set
-    data_filtered_by_year = filter_years(data, years, bin)
+    data_filtered_by_year, years = filter_years(data, years, bin)
+
     dr_prev = DrugResistancePrevalence(drug)
 
     if country:
@@ -39,17 +59,19 @@ def tabulate_drug_resistant(
                 & (data_filtered_by_year["Population"] == population)
             ]
         )
-        # TODO: if no data
-
-        phenotypes = dr_prev.count_phenotypes_per_year(data_filtered_by_year)
     elif population:
         data_filtered_by_year = pd.DataFrame(
             data_filtered_by_year.loc[
                 (data_filtered_by_year["Population"] == population)
             ]
         )
-        phenotypes = dr_prev.count_phenotypes_per_year(data_filtered_by_year)
-    else:
+
+    if data_filtered_by_year.empty:
+        print("WARNING: No data found with these filters.")
+        return
+    phenotypes = dr_prev.count_phenotypes_per_year(data_filtered_by_year)
+
+    if not country and not population:
         phenotypes = (
             data_filtered_by_year.groupby(["Country", drug])
             .size()
@@ -59,9 +81,10 @@ def tabulate_drug_resistant(
         )
     phenotypes["Total"] = phenotypes.sum(axis=1)
 
-    # calculating the frequency using all samples, no matter how many they are! (note that some combinations will have a small number of samples, so the frequency will not be an adequeate estimate))
+    # calculating the frequency, no matter how many they are! (note that some combinations will have a small number of samples, so the frequency will not be an adequeate estimate))
     phenotypes["Resistant Frequency"] = (
         phenotypes["Resistant"] / (phenotypes["Resistant"] + phenotypes["Sensitive"])
     ).round(2)
 
+    print(table_title(drug, country, population, years, bin))
     return phenotypes

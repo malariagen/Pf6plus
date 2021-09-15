@@ -18,7 +18,7 @@ def filter_years(data, years, bin=False):
         if bin:
             years = define_year_bins(years)
         data = data.loc[(data["Year"].isin(years))]
-    return data
+    return data, years
 
 
 def filter_data_by_country_and_population(

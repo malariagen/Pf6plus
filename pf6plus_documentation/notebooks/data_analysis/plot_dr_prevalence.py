@@ -95,7 +95,7 @@ def plot_dr_prevalence(
     #         raise ValueError('Drugs parameter must be a list.')
     population = set_population(population, country, data)
 
-    data = filter_years(data, years, bin)
+    data, years = filter_years(data, years, bin)
     pf_country = filter_data_by_country_and_population(
         data, threshold, country, population
     )
