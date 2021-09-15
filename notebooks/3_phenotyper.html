@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Drug Resistant Phenotypes inference (phenotyper) &#8212; Pf6+ User Guide</title>
+    <title>Inference of drug resistance status (phenotyper) &#8212; Pf6+ User Guide</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet" />
   <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -51,7 +51,7 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="Drug Resistant variants visualisation" href="2_variants_prevalence.html" />
+    <link rel="prev" title="Visualizing drug resistant variants" href="2_variants_prevalence.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -101,15 +101,18 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="2_variants_prevalence.html">
-   Drug Resistant variants visualisation
+   Visualizing drug resistant variants
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Drug Resistant Phenotypes inference
-   <em>
-    (phenotyper)
-   </em>
+   Inference of drug resistance status (
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     phenotyper
+    </span>
+   </code>
+   )
   </a>
  </li>
 </ul>
@@ -265,8 +268,13 @@
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#run-the-phenotyper">
-   Run the Phenotyper
+  <a class="reference internal nav-link" href="#run-phenotyper">
+   Run
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     phenotyper
+    </span>
+   </code>
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -280,8 +288,8 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#further-technical-details-when-using-phenotyper">
-   Further technical details when using phenotyper
+  <a class="reference internal nav-link" href="#further-technical-details">
+   Further technical details
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
@@ -309,9 +317,9 @@
                 
   <p><strong>We would like to thank all MalariaGEN Plasmodium falciparum Community Project partners for their contribution. If you use this resource please remember to also site the following studies:</strong>
 <a class="reference external" href="http://ngs.sanger.ac.uk/production/malaria/pfcommunityproject/Pf6/Pf_6_partner_studies.pdf">Pf6 partner studies</a> and <a class="reference external" href="http://ngs.sanger.ac.uk/production/malaria/Resource/29/20200705-GenRe-07-PartnerStudyInformation-0.39.pdf">GenRe partner studies</a>.</p>
-<div class="section" id="drug-resistant-phenotypes-inference-phenotyper">
-<h1>Drug Resistant Phenotypes inference <em>(phenotyper)</em><a class="headerlink" href="#drug-resistant-phenotypes-inference-phenotyper" title="Permalink to this headline">¶</a></h1>
-<p>This notebook allows you to use <code class="docutils literal notranslate"><span class="pre">phenotyper</span></code>, a tool to infer drug resistance status from genetic data. In brief, the tool applies a collection of rules, which have been curated from the literature, to determine if a set of genotypes confer resistance to a particular drug. Although we provide an up-to-date list of phenotyping rules (as a JSON file), the user can create his/her own rules or adopt rules from a different source.</p>
+<div class="section" id="inference-of-drug-resistance-status-phenotyper">
+<h1>Inference of drug resistance status (<code class="docutils literal notranslate"><span class="pre">phenotyper</span></code>)<a class="headerlink" href="#inference-of-drug-resistance-status-phenotyper" title="Permalink to this headline">¶</a></h1>
+<p>This notebook allows you to use <code class="docutils literal notranslate"><span class="pre">phenotyper</span></code>, a tool to predict drug resistance status from genetic data. In brief, the tool applies a collection of rules, which have been curated from the literature, to determine if a set of genotypes confer resistance to a particular drug. Although we provide an up-to-date list of phenotyping rules (as a JSON file), the user can create his/her own rules or adopt rules from a different source.</p>
 <p>Please see <code class="docutils literal notranslate"><span class="pre">https://gitlab.internal.sanger.ac.uk/dt5/phenotyper</span></code> to explore the complete documentation.</p>
 <p><strong>When to use <code class="docutils literal notranslate"><span class="pre">phenotyper</span></code>?</strong> When your Genetic Report Card (GRC) doesn’t have information regarding resistant phenotypes or you would like to update previous inferred phenotypes with new rules. Note that any file with information on genotypes (as described below) can be used with <code class="docutils literal notranslate"><span class="pre">phenotyper</span></code> to infer drug resistance status.\n”</p>
 <p><strong>How to use?</strong></p>
@@ -341,17 +349,17 @@
                 <span class="n">Show</span> <span class="n">this</span> <span class="n">help</span> <span class="n">message</span> <span class="ow">and</span> <span class="n">exit</span>
 </pre></div>
 </div>
-<p><strong>Which are the required fields for <code class="docutils literal notranslate"><span class="pre">--datafile</span></code> ?</strong> You will need a tabulated file with the following fields:</p>
+<p><strong>Which are the required fields for <code class="docutils literal notranslate"><span class="pre">--datafile</span></code> ?</strong> You will need a tabulated file with the following fields (i.e. header):</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">crt_76</span><span class="p">[</span><span class="n">K</span><span class="p">]</span>       <span class="n">crt_72</span><span class="o">-</span><span class="mi">76</span><span class="p">[</span><span class="n">CVMNK</span><span class="p">]</span>        <span class="n">dhfr_51</span><span class="p">[</span><span class="n">N</span><span class="p">]</span>      <span class="n">dhfr_59</span><span class="p">[</span><span class="n">C</span><span class="p">]</span>      <span class="n">dhfr_108</span><span class="p">[</span><span class="n">S</span><span class="p">]</span>     <span class="n">dhfr_164</span><span class="p">[</span><span class="n">I</span><span class="p">]</span>     <span class="n">dhps_437</span><span class="p">[</span><span class="n">G</span><span class="p">]</span>     <span class="n">dhps_540</span><span class="p">[</span><span class="n">K</span><span class="p">]</span>     <span class="n">dhps_581</span><span class="p">[</span><span class="n">A</span><span class="p">]</span>     <span class="n">dhps_613</span><span class="p">[</span><span class="n">A</span><span class="p">]</span>     <span class="n">k13_class</span>       <span class="n">k13_alleles</span>     <span class="n">mdr1_dup_call</span>   <span class="n">pm2_dup_call</span>    <span class="n">gch1_dup_call</span> 
 </pre></div>
 </div>
-<p>As you can see there is no need for your file to include any further metadata such as location; given that the <strong>phenotyper</strong> only uses genetic data for the inference. Just make sure that you have keep sample_ids from our output file, so you can cross-reference it with other metadata you might have.</p>
-<p>An example of the complete file used can be found on our example file <code class="docutils literal notranslate"><span class="pre">mygrc_metadata_nophenotypes.tsv</span></code>. If you have your GRC, this tool will create this file for you, before moving on to the phenotype prediction</p>
-<p><strong>What can I do with the output?</strong> An easy way to visualise your results, is by using <code class="docutils literal notranslate"><span class="pre">2_prevalence_DR.ipynb</span></code>; where you can also compare your data against Pf6+ (a public resource which combines information on over 13,000 samples worldwide), increasing the power of your data.</p>
-<p>If you are happy to use the default rules we’ve generated, you can continue with the procedure explained here; otherwise, please check the <code class="docutils literal notranslate"><span class="pre">Further</span> <span class="pre">technical</span> <span class="pre">details</span></code> section below.</p>
+<p>There is no need to include any metadata such as location given that <code class="docutils literal notranslate"><span class="pre">phenotyper</span></code> only uses genetic data for predicting drug resistance status. For clarity, we recommend the first field to refer to the sample id, e.g. <code class="docutils literal notranslate"><span class="pre">sample</span></code>, so you can easily cross-reference results with other metadata you might have.</p>
+<p>For an example of the complete file used you can check <code class="docutils literal notranslate"><span class="pre">mygrc_metadata_nophenotypes.tsv</span></code>. If you have your GRC data at hand, this notebook will create the required input file for you, before moving on to using <code class="docutils literal notranslate"><span class="pre">phenotyper</span></code>.</p>
+<p><strong>What can I do with the output?</strong> An easy way to visualise your results is by using <code class="docutils literal notranslate"><span class="pre">2_prevalence_DR.ipynb</span></code>, In that notebook you can compare your data with the Pf6+ dataset (more than 13,000 samples worldwide), which will help in contextualizing your results.</p>
+<p>If you are happy with the default phenotyping rules we’ve curated from the literature, you can follow with the procedure explained below. Otherwise, please check the <strong>Further technical details</strong> section for information on how the rules can be modified.</p>
 <div class="section" id="setup">
 <h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h2>
-<p>Download the phenotyper tool if you haven’t already</p>
+<p>Download <code class="docutils literal notranslate"><span class="pre">phenotyper</span></code> if you haven’t already.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#TO DO: this will only work once the phenotyper repo has been made public</span>
@@ -366,7 +374,7 @@ Username for &#39;https://github.com&#39;: ^C
 </div>
 </div>
 </div>
-<p>Below we set the paths to the phenotyper.r script, the example GRC, the rules file, and the output file containing the phenotypes. <code class="docutils literal notranslate"><span class="pre">PATH_TO_PHENOTYPER</span></code>, <code class="docutils literal notranslate"><span class="pre">PATH_TO_GRC</span></code>, and <code class="docutils literal notranslate"><span class="pre">PATH_TO_RULES</span></code> are set to the files cloned from git above (You may need to change the paths if you downloaded the phenotyper somewhere else). Please set <code class="docutils literal notranslate"><span class="pre">PATH_TO_OUTPUT</span></code> to the path of the file you would like the phenotyper to create and put the output in.</p>
+<p>Below, we set the paths to the <code class="docutils literal notranslate"><span class="pre">phenotyper.r</span></code> script, the example GRC, the rules file, and the output file containing the phenotypes. <code class="docutils literal notranslate"><span class="pre">PATH_TO_PHENOTYPER</span></code>, <code class="docutils literal notranslate"><span class="pre">PATH_TO_GRC</span></code>, and <code class="docutils literal notranslate"><span class="pre">PATH_TO_RULES</span></code> are set to the files cloned from git above (you may need to change the paths if you downloaded the tool somewhere else). Please set <code class="docutils literal notranslate"><span class="pre">PATH_TO_OUTPUT</span></code> to the path of the file you would like <code class="docutils literal notranslate"><span class="pre">phenotyper</span></code> to use as output.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#SET VARIABLES FOR RUNNING PHENOTYPER HERE </span>
@@ -386,7 +394,7 @@ env: PATH_TO_OUTPUT=#Enter path to output file you would like to create
 </div>
 </div>
 </div>
-<p>Running the following will allow you to run R and install the dependencies that you need to run the phenotyper tool.</p>
+<p>Running the following will allow you to run <code class="docutils literal notranslate"><span class="pre">R</span></code> and install the dependencies that <code class="docutils literal notranslate"><span class="pre">phenotyper</span></code> requires.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#required to use R inside the Jupyter Notebook</span>
@@ -401,7 +409,7 @@ env: PATH_TO_OUTPUT=#Enter path to output file you would like to create
 </div>
 </div>
 </div>
-<p>Install R dependencies for phenotyper</p>
+<p>Install <code class="docutils literal notranslate"><span class="pre">R</span></code> dependencies for <code class="docutils literal notranslate"><span class="pre">phenotyper</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">R</span> 
@@ -416,7 +424,7 @@ install.packages(&#39;jsonlite&#39;, quiet = TRUE)
 </div>
 <div class="section" id="running-on-colab">
 <h3>Running on Colab<a class="headerlink" href="#running-on-colab" title="Permalink to this headline">¶</a></h3>
-<p>If you are running the notebooks on colab then run the cell below to clone the python code needed for the plots below</p>
+<p>If you are running the notebooks on colab, then run the next cell to clone the python code needed for generating the plots below.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>git clone https://github.com/malariagen/Pf6plus.git 
@@ -434,10 +442,10 @@ cp: /content/Pf6plus/pf6plus_documentation/notebooks/data_analysis: No such file
 </div>
 <div class="section" id="using-your-own-grc">
 <h4>Using Your Own GRC<a class="headerlink" href="#using-your-own-grc" title="Permalink to this headline">¶</a></h4>
-<p>We have already set the <code class="docutils literal notranslate"><span class="pre">PATH_TO_GRC</span></code> above to the example included in the phenotyper repository. If you would like to use your own you can overide this below by uploading from your own machine or from your google drive.</p>
+<p>We have already set the <code class="docutils literal notranslate"><span class="pre">PATH_TO_GRC</span></code> above to the example included in the phenotyper repository. If you would like to use your own data, you can overide this below by uploading a file from your machine or from your google drive.</p>
 <div class="section" id="uploading-from-your-local-machine">
 <h5>Uploading from your local machine<a class="headerlink" href="#uploading-from-your-local-machine" title="Permalink to this headline">¶</a></h5>
-<p>You can upload a GRC from your own machine to run the phenotyper. Run the following and select the file from your local machine.</p>
+<p>You can upload a GRC file from your own machine to run <code class="docutils literal notranslate"><span class="pre">phenotyper</span></code>. Run the cell below and select the file from your local machine.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">google.colab</span> <span class="kn">import</span> <span class="n">files</span>
@@ -457,7 +465,7 @@ cp: /content/Pf6plus/pf6plus_documentation/notebooks/data_analysis: No such file
 </div>
 </div>
 </div>
-<p>Once the file has been uploaded you should see the path, copy this into the cell below</p>
+<p>Once the file has been uploaded you should see the path, copy this into the cell below.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">env</span> PATH_TO_GRC=#Enter the path here
@@ -468,7 +476,7 @@ cp: /content/Pf6plus/pf6plus_documentation/notebooks/data_analysis: No such file
 </div>
 <div class="section" id="upload-from-google-drive">
 <h5>Upload from Google Drive<a class="headerlink" href="#upload-from-google-drive" title="Permalink to this headline">¶</a></h5>
-<p>To use a file that is stored on your google drive first connect to your personal google drive by running the cell below and following the instructions that are output.</p>
+<p>To use a file that is stored on your google drive, first connect to your personal google drive by running the cell below and following the instructions that are printed as output.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">google.colab</span> <span class="kn">import</span> <span class="n">drive</span>
@@ -477,7 +485,7 @@ cp: /content/Pf6plus/pf6plus_documentation/notebooks/data_analysis: No such file
 </div>
 </div>
 </div>
-<p>Copy the GRC to google colab by running the following, replacing <code class="docutils literal notranslate"><span class="pre">&lt;Path</span> <span class="pre">to</span> <span class="pre">GRC</span> <span class="pre">on</span> <span class="pre">your</span> <span class="pre">drive&gt;</span></code> with the path where your file is stored on your google drive.</p>
+<p>Copy the GRC data to google colab by running the following, replacing <code class="docutils literal notranslate"><span class="pre">&lt;Path</span> <span class="pre">to</span> <span class="pre">GRC</span> <span class="pre">on</span> <span class="pre">your</span> <span class="pre">drive&gt;</span></code> with the path where your file is stored on your google drive.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>cp -r &lt;Path to GRC on your drive&gt; .
@@ -485,7 +493,7 @@ cp: /content/Pf6plus/pf6plus_documentation/notebooks/data_analysis: No such file
 </div>
 </div>
 </div>
-<p>Finally, run the following to set PATH_TO_GRC to where your GRC is stored on google colab.</p>
+<p>Finally, run the following to set <code class="docutils literal notranslate"><span class="pre">PATH_TO_GRC</span></code> to where your GRC data is stored on google colab.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">env</span> PATH_TO_GRC=/content/drive/&lt;GRC file name&gt;
@@ -498,10 +506,10 @@ cp: /content/Pf6plus/pf6plus_documentation/notebooks/data_analysis: No such file
 </div>
 <div class="section" id="running-locally">
 <h3>Running Locally<a class="headerlink" href="#running-locally" title="Permalink to this headline">¶</a></h3>
-<p>There are some steps you need to follow before opening the notebooks to run them locally. If you haven’t already, please follow these <a class="reference external" href="https://gitlab.com/malariagen/gsp/pf6plus/-/tree/add_jupyter_notebooks/notebooks#running-locally">instructions</a>.</p>
+<p>There are some steps you need to follow to run the notebooks locally. If you haven’t already, please follow these <a class="reference external" href="https://gitlab.com/malariagen/gsp/pf6plus/-/tree/add_jupyter_notebooks/notebooks#running-locally">instructions</a>.</p>
 <div class="section" id="id1">
 <h4>Using Your Own GRC<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
-<p>We have already set <code class="docutils literal notranslate"><span class="pre">PATH_TO_GRC</span></code> above to use the example in the phenotyper repository. If you would like to use your own please set the path to the GRC you would like to use below:</p>
+<p>We have already set <code class="docutils literal notranslate"><span class="pre">PATH_TO_GRC</span></code> above to use the example in the phenotyper repository. If you would like to use your own, please set the path to the GRC file you would like to use below:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">env</span> PATH_TO_GRC=#Path to GRC 
@@ -517,8 +525,8 @@ cp: /content/Pf6plus/pf6plus_documentation/notebooks/data_analysis: No such file
 </div>
 </div>
 </div>
-<div class="section" id="run-the-phenotyper">
-<h2>Run the Phenotyper<a class="headerlink" href="#run-the-phenotyper" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="run-phenotyper">
+<h2>Run <code class="docutils literal notranslate"><span class="pre">phenotyper</span></code><a class="headerlink" href="#run-phenotyper" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">--verbose</span></code> returns an execution log; which is useful to document and track how the samples have been classified</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -669,7 +677,7 @@ cp: /content/Pf6plus/pf6plus_documentation/notebooks/data_analysis: No such file
 </div>
 </div>
 </div>
-<p>The maps below show how including the Pf6+ data can increase the number of samples and the coverage that you have for a country. Click on the icons to find out more</p>
+<p>The maps below show how including the Pf6+ data can increase the number of samples and the coverage that you have for a country. Click on the icons to find out more.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">map_samples</span><span class="p">(</span><span class="n">results_with_geo</span><span class="p">,</span> <span class="n">zoom_to_start</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
@@ -684,7 +692,7 @@ cp: /content/Pf6plus/pf6plus_documentation/notebooks/data_analysis: No such file
 </div>
 </div>
 </div>
-<p>The plots below compare the phenotypes found for the GRC, which includes samples from Mali, compared to the samples in the Pf6+ dataset that come from Mali.</p>
+<p>The plots below compare the phenotypes found for the GRC data, which contains samples from Mali, to the samples in the Pf6+ dataset that come from Mali.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_phenotype_bar_chart_compared_to_pf6plus</span><span class="p">(</span><span class="n">results</span><span class="p">,</span><span class="n">pf6plus</span><span class="p">[</span><span class="n">pf6plus</span><span class="o">.</span><span class="n">Country</span> <span class="o">==</span> <span class="s1">&#39;Mali&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span>
@@ -695,14 +703,14 @@ cp: /content/Pf6plus/pf6plus_documentation/notebooks/data_analysis: No such file
 </div>
 <div class="section" id="what-s-next">
 <h2>What’s next?<a class="headerlink" href="#what-s-next" title="Permalink to this headline">¶</a></h2>
-<p>After obtaining your results from this tool, you can go back to the <code class="docutils literal notranslate"><span class="pre">2_variants_prevalence.ipynb</span></code> notebook to easily visualise your results and compare them with our Pf6+ dataset, which stores over 13,500 samples with inferred phenotypes, collected across the world.</p>
+<p>After obtaining phenotypes, you can go back to the <code class="docutils literal notranslate"><span class="pre">2_variants_prevalence.ipynb</span></code> notebook to easily visualise your results and compare them with the Pf6+ dataset (over 13,500 samples with inferred phenotypes, collected across the world).</p>
 </div>
 <hr class="docutils" />
-<div class="section" id="further-technical-details-when-using-phenotyper">
-<h2>Further technical details when using phenotyper<a class="headerlink" href="#further-technical-details-when-using-phenotyper" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="further-technical-details">
+<h2>Further technical details<a class="headerlink" href="#further-technical-details" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="rule-example">
 <h3>Rule example<a class="headerlink" href="#rule-example" title="Permalink to this headline">¶</a></h3>
-<p>Drugs are evaluated according to a set of rules specified in a JSON document. The only required fields for a rule are name and evaluation. Within evaluation one can access any of the fields/columns provided in the input data file using an R valid expression (see example below).</p>
+<p>Drugs are evaluated according to a set of rules specified in a JSON document. The only required fields for a rule are name and evaluation. Within evaluation one can access any of the fields/columns provided in the input data file using an <code class="docutils literal notranslate"><span class="pre">R</span></code> valid expression (see example below).</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;Chloroquine&quot;</span><span class="p">:{</span>
          <span class="s2">&quot;rules&quot;</span><span class="p">:[</span>
             <span class="p">{</span>
@@ -752,9 +760,9 @@ cp: /content/Pf6plus/pf6plus_documentation/notebooks/data_analysis: No such file
 </div>
 <div class="section" id="technicalities">
 <h3>Technicalities<a class="headerlink" href="#technicalities" title="Permalink to this headline">¶</a></h3>
-<p>Better to protect field names with backticks (`) in the JSON file as you’ll find weird characters there (for instance they come from Excel files) that will cause havoc in R. One can also do this programmatically by providing a character protection mapping (within the code but not recommended).</p>
-<p>The software interprets the rules executing the interpretable R code given in evaluation with some custom-made operators, like %==%, which means loose equality (symmetric any operation, any(a in b) or any(b in a)), to ease the evaluation. When dealing with this kind of task one usually writes a little parser for the operations allowed so no arbitrary code is evaluated. However, as we had to deal with different and changing formatting encodings (e.g. the way hets or missing calls are represented) the prototype evaluates any valid R expression given in the rules. We overwrite R system call functions to prevent attempts of code injection but this is obviously something to bear in mind.</p>
-<p>There are metarules that check the output status of a previously executed rule by referencing the name of the drug with &#64;, for instance:</p>
+<p>It is recommended to protect field names with backticks (`) in the JSON file as you’ll find weird characters there (for instance if they come from Excel files).</p>
+<p>The software interprets the rules executing the <code class="docutils literal notranslate"><span class="pre">R</span></code> code given in evaluation with the help of some custom-made operators, like <code class="docutils literal notranslate"><span class="pre">%==%</span></code>, which means loose equality (symmetric <code class="docutils literal notranslate"><span class="pre">any</span></code> operation, as in <code class="docutils literal notranslate"><span class="pre">any(a</span> <span class="pre">in</span> <span class="pre">b)</span> <span class="pre">or</span> <span class="pre">any(b</span> <span class="pre">in</span> <span class="pre">a)</span></code>), to ease the evaluation. <strong>Please check there is no malicious code present when using rules files from other sources</strong>.</p>
+<p>There are metarules that check the output status of a previously executed rule by referencing the name of the drug with <code class="docutils literal notranslate"><span class="pre">&#64;</span></code>, for instance:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>           <span class="p">{</span>
                <span class="s2">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;Dihydroartemisinin-piperaquine-3&quot;</span><span class="p">,</span>
                <span class="s2">&quot;change&quot;</span><span class="p">:</span><span class="s2">&quot;Missing&quot;</span><span class="p">,</span>
@@ -765,10 +773,10 @@ cp: /content/Pf6plus/pf6plus_documentation/notebooks/data_analysis: No such file
             <span class="p">},</span>
 </pre></div>
 </div>
-<p>One can run the program in –verbose mode and save the log. The file will be huge (and the execution is very slow), but I use it to trace back which rules were executed and why when phenotypes changed or were weird.</p>
-<p>#Important things to bear in mind</p>
+<p>One can run the program in <code class="docutils literal notranslate"><span class="pre">--verbose</span></code> mode and save the log. The file will be huge (and the execution is very slow), but it can be useful for debugging.</p>
+<p>###Important things to bear in mind</p>
 <ol class="simple">
-<li><p>For each drug we define a set of rules that are executed sequentially.</p></li>
+<li><p>For each drug the set of rules are executed sequentially.</p></li>
 <li><p><strong>Order is important</strong> (top-down execution until finding one that evaluates to true).</p></li>
 <li><p>There should be always a default catch-up rule at the end (it will be executed if nothing else has been executed. A default rule just evaluates to <code class="docutils literal notranslate"><span class="pre">True</span></code> or <code class="docutils literal notranslate"><span class="pre">T</span></code>.</p></li>
 </ol>
@@ -784,7 +792,7 @@ cp: /content/Pf6plus/pf6plus_documentation/notebooks/data_analysis: No such file
 </div>
 <ol class="simple">
 <li><p>The script will evaluate each rule according to the <code class="docutils literal notranslate"><span class="pre">evaluation</span></code> field (required).</p></li>
-<li><p>The output that will be obtained from a rule that evaluated to true must be specified using the <code class="docutils literal notranslate"><span class="pre">--ruleout</span></code> option. This allows for different outputs even when working with the same set of rules. Example: in our current phenotyping rules we made some arbitrary decisions (samples with het resistance markers are considered undetermined instead of resistant, you can imagine a different world where hets are resistant or dominant hets are resistant). However, one can check what difference these decisions make with the same set of rules by providing different output fields and indicating so when calling the program. For instance, using <code class="docutils literal notranslate"><span class="pre">--ruleout</span> <span class="pre">het_phenotype</span></code> instead of <code class="docutils literal notranslate"><span class="pre">--ruleout</span> <span class="pre">phenotype</span></code> (see example rule definition below)</p></li>
+<li><p>The output that will be obtained from a rule that evaluated to <code class="docutils literal notranslate"><span class="pre">True</span></code> must be specified using the <code class="docutils literal notranslate"><span class="pre">--ruleout</span></code> option. This allows for different outputs even when working with the same set of rules. Example: in our current phenotyping rules we made some arbitrary decisions (samples with het resistance markers are considered undetermined instead of resistant, you can imagine a different world where hets are resistant or dominant hets are resistant). However, one can check what difference these decisions make with the same set of rules by providing different output fields and indicating so when calling the program. For instance, using <code class="docutils literal notranslate"><span class="pre">--ruleout</span> <span class="pre">het_phenotype</span></code> instead of <code class="docutils literal notranslate"><span class="pre">--ruleout</span> <span class="pre">phenotype</span></code> (see example rule definition below)</p></li>
 </ol>
 <div class="highlight-&quot;Chloroquine&quot;:{ notranslate"><div class="highlight"><pre><span></span>         &quot;rules&quot;:[
             {
@@ -835,7 +843,7 @@ cp: /content/Pf6plus/pf6plus_documentation/notebooks/data_analysis: No such file
             <i class="prevnext-label fas fa-angle-left"></i>
             <div class="prevnext-info">
                 <p class="prevnext-label">previous</p>
-                <p class="prevnext-title">Drug Resistant variants visualisation</p>
+                <p class="prevnext-title">Visualizing drug resistant variants</p>
             </div>
         </a>
     </div>

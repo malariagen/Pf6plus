@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Drug Resistant variants visualisation &#8212; Pf6+ User Guide</title>
+    <title>Visualizing drug resistant variants &#8212; Pf6+ User Guide</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet" />
   <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -51,7 +51,7 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Drug Resistant Phenotypes inference (phenotyper)" href="3_phenotyper.html" />
+    <link rel="next" title="Inference of drug resistance status (phenotyper)" href="3_phenotyper.html" />
     <link rel="prev" title="Data exploration" href="1_partners.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -102,15 +102,18 @@
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Drug Resistant variants visualisation
+   Visualizing drug resistant variants
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="3_phenotyper.html">
-   Drug Resistant Phenotypes inference
-   <em>
-    (phenotyper)
-   </em>
+   Inference of drug resistance status (
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     phenotyper
+    </span>
+   </code>
+   )
   </a>
  </li>
 </ul>
@@ -260,8 +263,8 @@
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#plot-drug-resistant-prevalence">
-     Plot Drug Resistant Prevalence
+    <a class="reference internal nav-link" href="#plot-drug-resistance-prevalence">
+     Plot drug resistance prevalence
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
@@ -296,13 +299,13 @@
                 
   <p><strong>We would like to thank all MalariaGEN Plasmodium falciparum Community Project partners for their contribution. If you use this resource please remember to also site the following studies:</strong>
 <a class="reference external" href="http://ngs.sanger.ac.uk/production/malaria/pfcommunityproject/Pf6/Pf_6_partner_studies.pdf">Pf6 partner studies</a> and <a class="reference external" href="http://ngs.sanger.ac.uk/production/malaria/Resource/29/20200705-GenRe-07-PartnerStudyInformation-0.39.pdf">GenRe partner studies</a>.</p>
-<div class="section" id="drug-resistant-variants-visualisation">
-<h1>Drug Resistant variants visualisation<a class="headerlink" href="#drug-resistant-variants-visualisation" title="Permalink to this headline">¶</a></h1>
-<p>This notebook allows you to explore the genotypes within the dataset. You can use it to:</p>
+<div class="section" id="visualizing-drug-resistant-variants">
+<h1>Visualizing drug resistant variants<a class="headerlink" href="#visualizing-drug-resistant-variants" title="Permalink to this headline">¶</a></h1>
+<p>This notebook allows you to explore the genotypes present in a dataset. You can use it to:</p>
 <ul class="simple">
-<li><p>Visualise data on the frequency over time of individual genetic mutations (e.g. to showing multiple alleles dominating different countries at specific time points).</p></li>
-<li><p>Explore haplotype frequencies within different geographical levels (population, country and administrative level 1) over time displays variable regional diversity and haplotype compositions.</p></li>
-<li><p>Visualise the prevalence over time of samples classified as sensitive &amp; resistant for key drugs.</p></li>
+<li><p>Visualise the frequency of individual genetic mutations over time (e.g. showing which alleles are dominant in different countries at specific time points).</p></li>
+<li><p>Explore haplotype frequencies at different geographical levels (population, country and administrative level 1) over time, displaying regional diversity and haplotype compositions.</p></li>
+<li><p>Visualise the prevalence of drug resistance over time for key drugs.</p></li>
 </ul>
 <div class="section" id="setup">
 <h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h2>
@@ -319,7 +322,7 @@
 </div>
 <div class="section" id="running-locally">
 <h3>Running Locally<a class="headerlink" href="#running-locally" title="Permalink to this headline">¶</a></h3>
-<p>There are some steps you need to follow before opening the notebooks to run them locally. If you haven’t already, please follow these <a class="reference external" href="https://gitlab.com/malariagen/gsp/pf6plus/-/tree/add_jupyter_notebooks/notebooks#running-locally">instructions</a>.</p>
+<p>There are some steps you need to follow to run the notebooks locally. If you haven’t already, please follow these <a class="reference external" href="https://gitlab.com/malariagen/gsp/pf6plus/-/tree/add_jupyter_notebooks/notebooks#running-locally">instructions</a>.</p>
 </div>
 <div class="section" id="python-setup">
 <h3>Python Setup<a class="headerlink" href="#python-setup" title="Permalink to this headline">¶</a></h3>
@@ -354,7 +357,7 @@
 </div>
 </div>
 </div>
-<p>Here we filter out the samples which have IncludeInAnalysis set to True. This will filter out only the high-quality samples. (This includes a combination of QC samples for WGS and samples “included” in the GenRe analysis for AmpSeq)</p>
+<p>Here we filter out the samples which have <code class="docutils literal notranslate"><span class="pre">IncludeInAnalysis</span></code> set to <code class="docutils literal notranslate"><span class="pre">True</span></code>. This will retain only high-quality samples (both WGS and AmpSeq).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pf6plus</span><span class="o">=</span><span class="n">pf6plus</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">pf6plus</span><span class="o">.</span><span class="n">IncludeInAnalysis</span><span class="o">==</span><span class="kc">True</span><span class="p">]</span>
@@ -366,7 +369,7 @@
 </div>
 <div class="section" id="prevalence-of-resistant-variants">
 <h2>Prevalence of Resistant Variants<a class="headerlink" href="#prevalence-of-resistant-variants" title="Permalink to this headline">¶</a></h2>
-<p>Note: If your GRC doesn’t have information on Drug Resistance, you can use the Phenotyper tool (<code class="docutils literal notranslate"><span class="pre">3_phenotyper.ipynb</span></code>), to get it.</p>
+<p>Note: If your GRC data doesn’t have information on drug resistance, you can use <code class="docutils literal notranslate"><span class="pre">phenotyper</span></code> (<code class="docutils literal notranslate"><span class="pre">3_phenotyper.ipynb</span></code>), to generate it.</p>
 <div class="section" id="tabulate-drug-resistant-variants">
 <h3>Tabulate drug resistant variants<a class="headerlink" href="#tabulate-drug-resistant-variants" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
@@ -1013,11 +1016,11 @@ tabulate_drug_resistant(data, drug, country=None, population=None, year=None, bi
 </table>
 </div></div></div>
 </div>
-<p><strong>The number of samples collected across different locations in different years varies widely in the Pf6+ data resource. To increase confidence in the plots shown below, a threshold is set to only include country (or) population/year combinations with n_samples&gt;25. You can change this default value by using the <code class="docutils literal notranslate"><span class="pre">threshold</span></code> flag, but please be cautious.</strong></p>
+<p><strong>The number of samples collected across different locations in different years varies widely in the Pf6+ data resource. To increase confidence in the plots shown below, a threshold is set to only include country (or) population/year combinations with <code class="docutils literal notranslate"><span class="pre">n_samples</span> <span class="pre">&gt;</span> <span class="pre">25</span></code>. You can change this default value by using the <code class="docutils literal notranslate"><span class="pre">threshold</span></code> flag, but please be cautious.</strong></p>
 </div>
-<div class="section" id="plot-drug-resistant-prevalence">
-<h3>Plot Drug Resistant Prevalence<a class="headerlink" href="#plot-drug-resistant-prevalence" title="Permalink to this headline">¶</a></h3>
-<p>This function allow us to explore the frequencies of drug resistant variants within different spatial (country/population) and temporal (year) combinations. You can hover over the data points to see the specific numbers &amp; zoom in and out to change the scale.</p>
+<div class="section" id="plot-drug-resistance-prevalence">
+<h3>Plot drug resistance prevalence<a class="headerlink" href="#plot-drug-resistance-prevalence" title="Permalink to this headline">¶</a></h3>
+<p>This function explores the frequencies of drug resistant variants within different spatial (country/population) and temporal (year) combinations. You can hover over the data points to see the specific numbers and zoom in and out to change the scale.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">help</span><span class="p">(</span><span class="n">plot_dr_prevalence</span><span class="p">)</span>
@@ -3431,7 +3434,7 @@ plot_haplotype_frequency(data, gene, num_top_haplotypes=5, threshold=25, countri
 </div>
 <div class="section" id="what-else-can-i-do">
 <h2>What else can I do?<a class="headerlink" href="#what-else-can-i-do" title="Permalink to this headline">¶</a></h2>
-<p>We are interested on the evolution of Kelch haplotypes in ESEA &amp; would like to know how different are countries within this population &amp; whether we can detect country-specific mutations.</p>
+<p>We are interested on the evolution of <em>Kelch13</em> haplotypes in ESEA. We would like to know how different are countries within this population and whether we can detect country-specific mutations.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_haplotype_frequency</span><span class="p">(</span><span class="n">pf6plus</span><span class="p">,</span> <span class="s1">&#39;Kelch&#39;</span><span class="p">,</span> <span class="n">populations</span> <span class="o">=</span>  <span class="p">[</span><span class="s1">&#39;ESEA&#39;</span><span class="p">])</span>
@@ -4782,7 +4785,7 @@ plot_haplotype_frequency(data, gene, num_top_haplotypes=5, threshold=25, countri
 </div>
 <div class="section" id="an-extra-use-case">
 <h3>An extra use case..<a class="headerlink" href="#an-extra-use-case" title="Permalink to this headline">¶</a></h3>
-<p>Explore how different are PfDHFR haplotypes between ESEA and WSEA</p>
+<p>Explore how different are <em>dhfr</em> haplotypes between ESEA and WSEA.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_haplotype_frequency</span><span class="p">(</span><span class="n">pf6plus</span><span class="p">,</span> <span class="s1">&#39;PfDHFR&#39;</span><span class="p">,</span> <span class="n">populations</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;WSEA&#39;</span><span class="p">,</span><span class="s1">&#39;ESEA&#39;</span><span class="p">,</span><span class="s1">&#39;WAF&#39;</span><span class="p">,</span><span class="s1">&#39;EAF&#39;</span><span class="p">])</span>
@@ -5166,7 +5169,7 @@ plot_haplotype_frequency(data, gene, num_top_haplotypes=5, threshold=25, countri
         <a class="right-next" href="3_phenotyper.html" title="next page">
             <div class="prevnext-info">
                 <p class="prevnext-label">next</p>
-                <p class="prevnext-title">Drug Resistant Phenotypes inference <em>(phenotyper)</em></p>
+                <p class="prevnext-title">Inference of drug resistance status (<code class="docutils literal notranslate"><span class="pre">phenotyper</span></code>)</p>
             </div>
             <i class="prevnext-label fas fa-angle-right"></i>
         </a>
