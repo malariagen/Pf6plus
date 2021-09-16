@@ -178,7 +178,7 @@ def count_phenotypes_for_list_of_drugs(drugs, data):
 
 
 def plot_phenotype_bar_chart_compared_to_pf6plus(dataset, pf6plus):
-    figure = Subplots(colours=True)
+    figure = Subplots()
 
     # For results from grc
     drugs = [

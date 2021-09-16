@@ -81,9 +81,14 @@ class Subplots:
         }
         source = ColumnDataSource(data=data)
 
+        if self.colours:
+            colours = self.colour_options[:3]
+        else:
+            colours = ["red", "green", "grey"]
+
         figure = bokeh.plotting.figure(
             x_range=drugs,
-            y_range=(0, 550),
+            y_range=(0, 1000),
             plot_height=400,
             plot_width=400,
             title=title,
@@ -99,7 +104,7 @@ class Subplots:
             top="resistant",
             width=0.2,
             source=source,
-            color=self.colour_options[0],
+            color=colours[0],
             legend_label="resistant",
         )
 
@@ -109,7 +114,7 @@ class Subplots:
             top="sensitive",
             width=0.2,
             source=source,
-            color=self.colour_options[1],
+            color=colours[1],
             legend_label="sensitive",
         )
 
@@ -119,7 +124,7 @@ class Subplots:
             top="undetermined",
             width=0.2,
             source=source,
-            color=self.colour_options[2],
+            color=colours[2],
             legend_label="undetermined",
         )
 
