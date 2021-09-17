@@ -94,7 +94,7 @@ source pf6plus_notebooks_env/bin/activate
 You will then need to clone this repository to your own machine. Navigate to where you would like to store this and run the following command:
 
 ```
-git clone https://gitlab.com/malariagen/gsp/pf6plus.git
+git clone https://github.com/malariagen/Pf6plus
 ```
 
 #### Running Jupyter
