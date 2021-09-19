@@ -125,7 +125,7 @@ def plot_haplotype_frequency(
     nfilters = len(filters)
 
     # Only include dates specified
-    data = filter_years(data, years, bin)
+    data, _ = filter_years(data, years, bin)
 
     figure = Subplots(colours=True)
     for i in range(nfilters):
