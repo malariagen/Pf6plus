@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Inference of drug resistance status (phenotyper) &#8212; Pf6+ User Guide</title>
+    <title>Inference of drug resistance status &#8212; Pf6+ User Guide</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet" />
   <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -51,7 +51,7 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="Visualizing drug resistant variants" href="2_variants_prevalence.html" />
+    <link rel="prev" title="Analysing patterns of drug resistance" href="2_variants_prevalence.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -96,23 +96,17 @@
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="1_partners.html">
-   Pf6+ Resource Exploration
+   Explore the Pf6+ dataset
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="2_variants_prevalence.html">
-   Visualizing drug resistant variants
+   Analysing patterns of drug resistance
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Inference of drug resistance status (
-   <code class="docutils literal notranslate">
-    <span class="pre">
-     phenotyper
-    </span>
-   </code>
-   )
+   Inference of drug resistance status
   </a>
  </li>
 </ul>
@@ -225,42 +219,71 @@
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#when-to-use-phenotyper">
+   When to use
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     phenotyper
+    </span>
+   </code>
+   ?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#how-to-use">
+   How to use?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#which-are-the-required-fields-for-datafile">
+   Which are the required fields for
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     --datafile
+    </span>
+   </code>
+   ?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-can-i-do-with-the-output">
+   What can I do with the output?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#setup">
    Setup
   </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#running-phenotyper-on-your-own-data">
+   Running
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     phenotyper
+    </span>
+   </code>
+   on your own data
+  </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#running-on-colab">
-     Running on Colab
+    <a class="reference internal nav-link" href="#running-locally">
+     Running locally
     </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#using-your-own-grc">
-       Using Your Own GRC
-      </a>
-      <ul class="nav section-nav flex-column">
-       <li class="toc-h5 nav-item toc-entry">
-        <a class="reference internal nav-link" href="#uploading-from-your-local-machine">
-         Uploading from your local machine
-        </a>
-       </li>
-       <li class="toc-h5 nav-item toc-entry">
-        <a class="reference internal nav-link" href="#upload-from-google-drive">
-         Upload from Google Drive
-        </a>
-       </li>
-      </ul>
-     </li>
-    </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#running-locally">
-     Running Locally
+    <a class="reference internal nav-link" href="#running-on-google-colab">
+     Running on Google Colab
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id1">
-       Using Your Own GRC
+      <a class="reference internal nav-link" href="#uploading-the-grc-from-your-local-machine">
+       Uploading the GRC from your local machine
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#read-the-grc-from-google-drive">
+       Read the GRC from Google Drive
       </a>
      </li>
     </ul>
@@ -315,14 +338,17 @@
         
               <div>
                 
-  <p><strong>We would like to thank all MalariaGEN Plasmodium falciparum Community Project partners for their contribution. If you use this resource please remember to also site the following studies:</strong>
-<a class="reference external" href="http://ngs.sanger.ac.uk/production/malaria/pfcommunityproject/Pf6/Pf_6_partner_studies.pdf">Pf6 partner studies</a> and <a class="reference external" href="http://ngs.sanger.ac.uk/production/malaria/Resource/29/20200705-GenRe-07-PartnerStudyInformation-0.39.pdf">GenRe partner studies</a>.</p>
-<div class="section" id="inference-of-drug-resistance-status-phenotyper">
-<h1>Inference of drug resistance status (<code class="docutils literal notranslate"><span class="pre">phenotyper</span></code>)<a class="headerlink" href="#inference-of-drug-resistance-status-phenotyper" title="Permalink to this headline">¶</a></h1>
-<p>This notebook allows you to use <code class="docutils literal notranslate"><span class="pre">phenotyper</span></code>, a tool to predict drug resistance status from genetic data. In brief, the tool applies a collection of rules, which have been curated from the literature, to determine if a set of genotypes confer resistance to a particular drug. Although we provide an up-to-date list of phenotyping rules (as a JSON file), the user can create his/her own rules or adopt rules from a different source.</p>
-<p>Please see <code class="docutils literal notranslate"><span class="pre">https://gitlab.internal.sanger.ac.uk/dt5/phenotyper</span></code> to explore the complete documentation.</p>
-<p><strong>When to use <code class="docutils literal notranslate"><span class="pre">phenotyper</span></code>?</strong> When your Genetic Report Card (GRC) doesn’t have information regarding resistant phenotypes or you would like to update previous inferred phenotypes with new rules. Note that any file with information on genotypes (as described below) can be used with <code class="docutils literal notranslate"><span class="pre">phenotyper</span></code> to infer drug resistance status.\n”</p>
-<p><strong>How to use?</strong></p>
+  <div class="section" id="inference-of-drug-resistance-status">
+<h1>Inference of drug resistance status<a class="headerlink" href="#inference-of-drug-resistance-status" title="Permalink to this headline">¶</a></h1>
+<p>This notebook describes how to use <code class="docutils literal notranslate"><span class="pre">phenotyper</span></code>, a tool to predict drug resistance status from genetic data.</p>
+<p>In brief, the tool applies a collection of rules, which have been curated from the literature, to determine if a set of genotypes confer resistance to a particular drug. Although we provide an up-to-date list of phenotyping rules (as a JSON file), users can create their own rules or adopt rules from a different source.</p>
+<p>Check the full documentation <a class="reference external" href="https://gitlab.internal.sanger.ac.uk/dt5/phenotyper">here</a>.</p>
+<div class="section" id="when-to-use-phenotyper">
+<h2>When to use <code class="docutils literal notranslate"><span class="pre">phenotyper</span></code>?<a class="headerlink" href="#when-to-use-phenotyper" title="Permalink to this headline">¶</a></h2>
+<p>When your Genetic Report Card (GRC) doesn’t have information regarding resistant phenotypes or you would like to update previous inferred phenotypes with new rules. Note that any file with information on genotypes (as described below) can be used with <code class="docutils literal notranslate"><span class="pre">phenotyper</span></code> to infer drug resistance status.\n”</p>
+</div>
+<div class="section" id="how-to-use">
+<h2>How to use?<a class="headerlink" href="#how-to-use" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Usage</span><span class="p">:</span> <span class="o">./</span><span class="n">phenotyper</span><span class="o">.</span><span class="n">r</span> <span class="p">[</span><span class="n">options</span><span class="p">]</span>
 <span class="n">Evaluates</span> <span class="n">a</span> <span class="nb">set</span> <span class="n">of</span> <span class="n">phenotyping</span> <span class="n">rules</span> <span class="n">on</span> <span class="nb">all</span> <span class="n">the</span> <span class="n">samples</span> <span class="n">of</span> <span class="n">the</span> <span class="n">given</span> <span class="n">data</span> <span class="n">file</span><span class="o">.</span>
 
@@ -349,20 +375,32 @@
                 <span class="n">Show</span> <span class="n">this</span> <span class="n">help</span> <span class="n">message</span> <span class="ow">and</span> <span class="n">exit</span>
 </pre></div>
 </div>
-<p><strong>Which are the required fields for <code class="docutils literal notranslate"><span class="pre">--datafile</span></code> ?</strong> You will need a tabulated file with the following fields (i.e. header):</p>
+</div>
+<div class="section" id="which-are-the-required-fields-for-datafile">
+<h2>Which are the required fields for <code class="docutils literal notranslate"><span class="pre">--datafile</span></code> ?<a class="headerlink" href="#which-are-the-required-fields-for-datafile" title="Permalink to this headline">¶</a></h2>
+<p>You will need a tabulated file with the following fields (i.e. header):</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">crt_76</span><span class="p">[</span><span class="n">K</span><span class="p">]</span>       <span class="n">crt_72</span><span class="o">-</span><span class="mi">76</span><span class="p">[</span><span class="n">CVMNK</span><span class="p">]</span>        <span class="n">dhfr_51</span><span class="p">[</span><span class="n">N</span><span class="p">]</span>      <span class="n">dhfr_59</span><span class="p">[</span><span class="n">C</span><span class="p">]</span>      <span class="n">dhfr_108</span><span class="p">[</span><span class="n">S</span><span class="p">]</span>     <span class="n">dhfr_164</span><span class="p">[</span><span class="n">I</span><span class="p">]</span>     <span class="n">dhps_437</span><span class="p">[</span><span class="n">G</span><span class="p">]</span>     <span class="n">dhps_540</span><span class="p">[</span><span class="n">K</span><span class="p">]</span>     <span class="n">dhps_581</span><span class="p">[</span><span class="n">A</span><span class="p">]</span>     <span class="n">dhps_613</span><span class="p">[</span><span class="n">A</span><span class="p">]</span>     <span class="n">k13_class</span>       <span class="n">k13_alleles</span>     <span class="n">mdr1_dup_call</span>   <span class="n">pm2_dup_call</span>    <span class="n">gch1_dup_call</span> 
 </pre></div>
 </div>
 <p>There is no need to include any metadata such as location given that <code class="docutils literal notranslate"><span class="pre">phenotyper</span></code> only uses genetic data for predicting drug resistance status. For clarity, we recommend the first field to refer to the sample id, e.g. <code class="docutils literal notranslate"><span class="pre">sample</span></code>, so you can easily cross-reference results with other metadata you might have.</p>
 <p>For an example of the complete file used you can check <code class="docutils literal notranslate"><span class="pre">mygrc_metadata_nophenotypes.tsv</span></code>. If you have your GRC data at hand, this notebook will create the required input file for you, before moving on to using <code class="docutils literal notranslate"><span class="pre">phenotyper</span></code>.</p>
-<p><strong>What can I do with the output?</strong> An easy way to visualise your results is by using <code class="docutils literal notranslate"><span class="pre">2_prevalence_DR.ipynb</span></code>, In that notebook you can compare your data with the Pf6+ dataset (more than 13,000 samples worldwide), which will help in contextualizing your results.</p>
+</div>
+<div class="section" id="what-can-i-do-with-the-output">
+<h2>What can I do with the output?<a class="headerlink" href="#what-can-i-do-with-the-output" title="Permalink to this headline">¶</a></h2>
+<p>An easy way to visualise your results is by using <code class="docutils literal notranslate"><span class="pre">2_prevalence_DR.ipynb</span></code>, In that notebook you can compare your data with the Pf6+ dataset (more than 13,000 samples worldwide), which will help in contextualizing your results.</p>
 <p>If you are happy with the default phenotyping rules we’ve curated from the literature, you can follow with the procedure explained below. Otherwise, please check the <strong>Further technical details</strong> section for information on how the rules can be modified.</p>
+</div>
 <div class="section" id="setup">
 <h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h2>
-<p>Download <code class="docutils literal notranslate"><span class="pre">phenotyper</span></code> if you haven’t already.</p>
+<p>First, you will have to download <code class="docutils literal notranslate"><span class="pre">phenotyper</span></code> if you haven’t already.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>git clone https://github.com/malariagen/phenotyper.git
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fatal: destination path &#39;phenotyper&#39; already exists and is not an empty directory.
 </pre></div>
 </div>
 </div>
@@ -375,8 +413,106 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">folders</span><span class="o">/</span><span class="mi">7</span><span class="n">q</span><span class="o">/</span><span class="mi">6_4</span><span class="n">qz7114p3_14cw9ln9ysqw000dy3</span><span class="o">/</span><span class="n">T</span><span class="o">/</span><span class="n">ipykernel_32552</span><span class="o">/</span><span class="mf">527465753.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1">#required to use R inside the Jupyter Notebook</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">get_ipython</span><span class="p">()</span><span class="o">.</span><span class="n">run_line_magic</span><span class="p">(</span><span class="s1">&#39;load_ext&#39;</span><span class="p">,</span> <span class="s1">&#39;rpy2.ipython&#39;</span><span class="p">)</span>
+
+<span class="nn">~/pf6plus/lib/python3.8/site-packages/IPython/core/interactiveshell.py</span> in <span class="ni">run_line_magic</span><span class="nt">(self, magic_name, line, _stack_depth)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2346</span>                 <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;local_ns&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_local_scope</span><span class="p">(</span><span class="n">stack_depth</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2347</span>             <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">builtin_trap</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">2348</span>                 <span class="n">result</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2349</span>             <span class="k">return</span> <span class="n">result</span>
+<span class="g g-Whitespace">   </span><span class="mi">2350</span> 
+
+<span class="nn">~/pf6plus/lib/python3.8/site-packages/decorator.py</span> in <span class="ni">fun</span><span class="nt">(*args, **kw)</span>
+<span class="g g-Whitespace">    </span><span class="mi">230</span>             <span class="k">if</span> <span class="ow">not</span> <span class="n">kwsyntax</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">231</span>                 <span class="n">args</span><span class="p">,</span> <span class="n">kw</span> <span class="o">=</span> <span class="n">fix</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">kw</span><span class="p">,</span> <span class="n">sig</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">232</span>             <span class="k">return</span> <span class="n">caller</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="o">*</span><span class="p">(</span><span class="n">extras</span> <span class="o">+</span> <span class="n">args</span><span class="p">),</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">233</span>     <span class="n">fun</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="vm">__name__</span>
+<span class="g g-Whitespace">    </span><span class="mi">234</span>     <span class="n">fun</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="vm">__doc__</span>
+
+<span class="nn">~/pf6plus/lib/python3.8/site-packages/IPython/core/magic.py</span> in <span class="ni">&lt;lambda&gt;</span><span class="nt">(f, *a, **k)</span>
+<span class="g g-Whitespace">    </span><span class="mi">185</span>     <span class="c1"># but it&#39;s overkill for just that one bit of state.</span>
+<span class="g g-Whitespace">    </span><span class="mi">186</span>     <span class="k">def</span> <span class="nf">magic_deco</span><span class="p">(</span><span class="n">arg</span><span class="p">):</span>
+<span class="ne">--&gt; </span><span class="mi">187</span>         <span class="n">call</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">f</span><span class="p">,</span> <span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="o">**</span><span class="n">k</span><span class="p">:</span> <span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="o">**</span><span class="n">k</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">188</span> 
+<span class="g g-Whitespace">    </span><span class="mi">189</span>         <span class="k">if</span> <span class="n">callable</span><span class="p">(</span><span class="n">arg</span><span class="p">):</span>
+
+<span class="nn">~/pf6plus/lib/python3.8/site-packages/IPython/core/magics/extension.py</span> in <span class="ni">load_ext</span><span class="nt">(self, module_str)</span>
+<span class="g g-Whitespace">     </span><span class="mi">31</span>         <span class="k">if</span> <span class="ow">not</span> <span class="n">module_str</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">32</span>             <span class="k">raise</span> <span class="n">UsageError</span><span class="p">(</span><span class="s1">&#39;Missing module name.&#39;</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">33</span>         <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">shell</span><span class="o">.</span><span class="n">extension_manager</span><span class="o">.</span><span class="n">load_extension</span><span class="p">(</span><span class="n">module_str</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">34</span> 
+<span class="g g-Whitespace">     </span><span class="mi">35</span>         <span class="k">if</span> <span class="n">res</span> <span class="o">==</span> <span class="s1">&#39;already loaded&#39;</span><span class="p">:</span>
+
+<span class="nn">~/pf6plus/lib/python3.8/site-packages/IPython/core/extensions.py</span> in <span class="ni">load_extension</span><span class="nt">(self, module_str)</span>
+<span class="g g-Whitespace">     </span><span class="mi">78</span>             <span class="k">if</span> <span class="n">module_str</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">79</span>                 <span class="k">with</span> <span class="n">prepended_to_syspath</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ipython_extension_dir</span><span class="p">):</span>
+<span class="ne">---&gt; </span><span class="mi">80</span>                     <span class="n">mod</span> <span class="o">=</span> <span class="n">import_module</span><span class="p">(</span><span class="n">module_str</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">81</span>                     <span class="k">if</span> <span class="n">mod</span><span class="o">.</span><span class="vm">__file__</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ipython_extension_dir</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">82</span>                         <span class="nb">print</span><span class="p">((</span><span class="s2">&quot;Loading extensions from </span><span class="si">{dir}</span><span class="s2"> is deprecated. &quot;</span>
+
+<span class="nn">/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.8/lib/python3.8/importlib/__init__.py</span> in <span class="ni">import_module</span><span class="nt">(name, package)</span>
+<span class="g g-Whitespace">    </span><span class="mi">125</span>                 <span class="k">break</span>
+<span class="g g-Whitespace">    </span><span class="mi">126</span>             <span class="n">level</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="ne">--&gt; </span><span class="mi">127</span>     <span class="k">return</span> <span class="n">_bootstrap</span><span class="o">.</span><span class="n">_gcd_import</span><span class="p">(</span><span class="n">name</span><span class="p">[</span><span class="n">level</span><span class="p">:],</span> <span class="n">package</span><span class="p">,</span> <span class="n">level</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">128</span> 
+<span class="g g-Whitespace">    </span><span class="mi">129</span> 
+
+<span class="nn">/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.8/lib/python3.8/importlib/_bootstrap.py</span> in <span class="ni">_gcd_import</span><span class="nt">(name, package, level)</span>
+
+<span class="nn">/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.8/lib/python3.8/importlib/_bootstrap.py</span> in <span class="ni">_find_and_load</span><span class="nt">(name, import_)</span>
+
+<span class="nn">/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.8/lib/python3.8/importlib/_bootstrap.py</span> in <span class="ni">_find_and_load_unlocked</span><span class="nt">(name, import_)</span>
+
+<span class="nn">/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.8/lib/python3.8/importlib/_bootstrap.py</span> in <span class="ni">_load_unlocked</span><span class="nt">(spec)</span>
+
+<span class="nn">/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.8/lib/python3.8/importlib/_bootstrap_external.py</span> in <span class="ni">exec_module</span><span class="nt">(self, module)</span>
+
+<span class="nn">/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.8/lib/python3.8/importlib/_bootstrap.py</span> in <span class="ni">_call_with_frames_removed</span><span class="nt">(f, *args, **kwds)</span>
+
+<span class="o">~/</span><span class="n">pf6plus</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">rpy2</span><span class="o">/</span><span class="n">ipython</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">rmagic</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> 
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">load_ipython_extension</span> <span class="o">=</span> <span class="n">rmagic</span><span class="o">.</span><span class="n">load_ipython_extension</span>
+
+<span class="o">~/</span><span class="n">pf6plus</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">rpy2</span><span class="o">/</span><span class="n">ipython</span><span class="o">/</span><span class="n">rmagic</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">     </span><span class="mi">53</span> <span class="c1"># numpy and rpy2 imports</span>
+<span class="g g-Whitespace">     </span><span class="mi">54</span> 
+<span class="ne">---&gt; </span><span class="mi">55</span> <span class="kn">import</span> <span class="nn">rpy2.rinterface</span> <span class="k">as</span> <span class="nn">ri</span>
+<span class="g g-Whitespace">     </span><span class="mi">56</span> <span class="kn">import</span> <span class="nn">rpy2.rinterface_lib.callbacks</span>
+<span class="g g-Whitespace">     </span><span class="mi">57</span> <span class="kn">import</span> <span class="nn">rpy2.robjects</span> <span class="k">as</span> <span class="nn">ro</span>
+
+<span class="o">~/</span><span class="n">pf6plus</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">rpy2</span><span class="o">/</span><span class="n">rinterface</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="kn">import</span> <span class="nn">warnings</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span>
+<span class="ne">---&gt; </span><span class="mi">12</span> <span class="kn">from</span> <span class="nn">rpy2.rinterface_lib</span> <span class="kn">import</span> <span class="n">openrlib</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="kn">import</span> <span class="nn">rpy2.rinterface_lib._rinterface_capi</span> <span class="k">as</span> <span class="nn">_rinterface</span>
+<span class="g g-Whitespace">     </span><span class="mi">14</span> <span class="kn">import</span> <span class="nn">rpy2.rinterface_lib.embedded</span> <span class="k">as</span> <span class="nn">embedded</span>
+
+<span class="o">~/</span><span class="n">pf6plus</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">rpy2</span><span class="o">/</span><span class="n">rinterface_lib</span><span class="o">/</span><span class="n">openrlib</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">     </span><span class="mi">42</span>     <span class="n">rlib</span> <span class="o">=</span> <span class="n">_rinterface_cffi</span><span class="o">.</span><span class="n">lib</span>
+<span class="g g-Whitespace">     </span><span class="mi">43</span> <span class="k">else</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">44</span>     <span class="n">rlib</span> <span class="o">=</span> <span class="n">_dlopen_rlib</span><span class="p">(</span><span class="n">R_HOME</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">45</span> 
+<span class="g g-Whitespace">     </span><span class="mi">46</span> 
+
+<span class="nn">~/pf6plus/lib/python3.8/site-packages/rpy2/rinterface_lib/openrlib.py</span> in <span class="ni">_dlopen_rlib</span><span class="nt">(r_home)</span>
+<span class="g g-Whitespace">     </span><span class="mi">29</span>     <span class="n">This</span> <span class="ow">is</span> <span class="n">only</span> <span class="n">relevant</span> <span class="ow">in</span> <span class="n">ABI</span> <span class="n">mode</span><span class="o">.</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">     </span><span class="mi">30</span><span class="s2">     if r_home is None:</span>
+<span class="ne">---&gt; </span><span class="mi">31</span><span class="s2">         raise ValueError(&#39;r_home is None. &#39;</span>
+<span class="g g-Whitespace">     </span><span class="mi">32</span><span class="s2">                          &#39;Try python -m rpy2.situation&#39;)</span>
+<span class="g g-Whitespace">     </span><span class="mi">33</span><span class="s2">     lib_path = rpy2.situation.get_rlib_path(r_home, platform.system())</span>
+
+<span class="ne">ValueError</span>: r_home is None. Try python -m rpy2.situation
+</pre></div>
 </div>
-<p>Install <code class="docutils literal notranslate"><span class="pre">R</span></code> dependencies for <code class="docutils literal notranslate"><span class="pre">phenotyper</span></code>.</p>
+</div>
+</div>
+<p>Then we need to install the <code class="docutils literal notranslate"><span class="pre">R</span></code> modules required by <code class="docutils literal notranslate"><span class="pre">phenotyper</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">R</span> 
@@ -389,14 +525,47 @@ install.packages(&#39;jsonlite&#39;, quiet = TRUE)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--- Please select a CRAN mirror for use in this session ---
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>UsageError: Cell magic `%%R` not found.
 </pre></div>
 </div>
 </div>
 </div>
-<div class="section" id="running-on-colab">
-<h3>Running on Colab<a class="headerlink" href="#running-on-colab" title="Permalink to this headline">¶</a></h3>
-<p>If you are running the notebooks on colab, then run the next cell to clone the python code needed for generating the plots below.</p>
+</div>
+<div class="section" id="running-phenotyper-on-your-own-data">
+<h2>Running <code class="docutils literal notranslate"><span class="pre">phenotyper</span></code> on your own data<a class="headerlink" href="#running-phenotyper-on-your-own-data" title="Permalink to this headline">¶</a></h2>
+<p>You have two main options:</p>
+<ol class="simple">
+<li><p>Run the tool on your local machine, or</p></li>
+<li><p>Run the tool on Google Colab, in which case you can either (a) upload the GRC from your local machine, or (b) read it from Google Drive</p></li>
+</ol>
+<p><strong>Note: We have also included an example GRC in the repository so you can run through this example even if you don’t have a GRC. In this case, run the cell below and go straight to the section “Run <code class="docutils literal notranslate"><span class="pre">phenotyper</span></code>”.</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">env</span> PATH_TO_GRC=./phenotyper/ext/fake_grc/ghana_grc.tsv
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>env: PATH_TO_GRC=./phenotyper/ext/fake_grc/ghana_grc.tsv
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="running-locally">
+<h3>Running locally<a class="headerlink" href="#running-locally" title="Permalink to this headline">¶</a></h3>
+<p>There are some steps you need to follow to run the notebooks locally. If you haven’t already, please follow these <a class="reference external" href="https://github.com/malariagen/Pf6plus#running-the-notebooks-locally">instructions</a>.</p>
+<p>Next, you will need to specify where to find the GRC you would like to process. To do so, you need to set the path to the GRC file here:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">env</span> PATH_TO_GRC=#Path to GRC 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="running-on-google-colab">
+<h3>Running on Google Colab<a class="headerlink" href="#running-on-google-colab" title="Permalink to this headline">¶</a></h3>
+<p>If you are running the notebooks on Colab, then run the next cell to clone the Python code needed for generating the plots below.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>git clone https://github.com/malariagen/Pf6plus.git 
@@ -405,12 +574,9 @@ install.packages(&#39;jsonlite&#39;, quiet = TRUE)
 </div>
 </div>
 </div>
-<div class="section" id="using-your-own-grc">
-<h4>Using Your Own GRC<a class="headerlink" href="#using-your-own-grc" title="Permalink to this headline">¶</a></h4>
-<p>We have already set the <code class="docutils literal notranslate"><span class="pre">PATH_TO_GRC</span></code> above to the example included in the phenotyper repository. If you would like to use your own data, you can overide this below by uploading a file from your machine or from your google drive.</p>
-<div class="section" id="uploading-from-your-local-machine">
-<h5>Uploading from your local machine<a class="headerlink" href="#uploading-from-your-local-machine" title="Permalink to this headline">¶</a></h5>
-<p>You can upload a GRC file from your own machine to run <code class="docutils literal notranslate"><span class="pre">phenotyper</span></code>. Run the cell below and select the file from your local machine.</p>
+<div class="section" id="uploading-the-grc-from-your-local-machine">
+<h4>Uploading the GRC from your local machine<a class="headerlink" href="#uploading-the-grc-from-your-local-machine" title="Permalink to this headline">¶</a></h4>
+<p>You can upload a GRC file from your own machine to run <code class="docutils literal notranslate"><span class="pre">phenotyper</span></code>. Run the cell below and select the file from your local machine (it will open a dialog box).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">google.colab</span> <span class="kn">import</span> <span class="n">files</span>
@@ -419,7 +585,7 @@ install.packages(&#39;jsonlite&#39;, quiet = TRUE)
 </div>
 </div>
 </div>
-<p>Once the file has been uploaded you should see the path, copy this into the cell below.</p>
+<p>Once the file has been uploaded you should see the path: copy it into the cell below.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">env</span> PATH_TO_GRC=#Enter the path here
@@ -428,9 +594,9 @@ install.packages(&#39;jsonlite&#39;, quiet = TRUE)
 </div>
 </div>
 </div>
-<div class="section" id="upload-from-google-drive">
-<h5>Upload from Google Drive<a class="headerlink" href="#upload-from-google-drive" title="Permalink to this headline">¶</a></h5>
-<p>To use a file that is stored on your google drive, first connect to your personal google drive by running the cell below and following the instructions that are printed as output.</p>
+<div class="section" id="read-the-grc-from-google-drive">
+<h4>Read the GRC from Google Drive<a class="headerlink" href="#read-the-grc-from-google-drive" title="Permalink to this headline">¶</a></h4>
+<p>To use a file that is stored on your google drive, first connect to your personal Google Drive by running the cell below and following the instructions that are printed as output.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">google.colab</span> <span class="kn">import</span> <span class="n">drive</span>
@@ -458,22 +624,6 @@ install.packages(&#39;jsonlite&#39;, quiet = TRUE)
 </div>
 </div>
 </div>
-<div class="section" id="running-locally">
-<h3>Running Locally<a class="headerlink" href="#running-locally" title="Permalink to this headline">¶</a></h3>
-<p>There are some steps you need to follow to run the notebooks locally. If you haven’t already, please follow these <a class="reference external" href="https://github.com/malariagen/Pf6plus#running-the-notebooks-locally">instructions</a>.</p>
-<div class="section" id="id1">
-<h4>Using Your Own GRC<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
-<p>If you would like to use your own GRC, please set the path to the GRC file here, if not, you can skip the next cell and run <code class="docutils literal notranslate"><span class="pre">phenotyper</span></code> with an example.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">env</span> PATH_TO_GRC=#Path to GRC 
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
 <hr class="docutils" />
 <div class="section" id="run-phenotyper">
 <h2>Run <code class="docutils literal notranslate"><span class="pre">phenotyper</span></code><a class="headerlink" href="#run-phenotyper" title="Permalink to this headline">¶</a></h2>
@@ -483,7 +633,6 @@ install.packages(&#39;jsonlite&#39;, quiet = TRUE)
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#SET VARIABLES FOR RUNNING PHENOTYPER HERE </span>
 <span class="o">%</span><span class="k">env</span> PATH_TO_PHENOTYPER=./phenotyper/phenotyper.r 
-<span class="o">%</span><span class="k">env</span> PATH_TO_GRC=./phenotyper/ext/fake_grc/ghana_grc.tsv
 <span class="o">%</span><span class="k">env</span> PATH_TO_RULES=./phenotyper/ext/rules/test_rules.json
 <span class="o">%</span><span class="k">env</span> PATH_TO_OUTPUT=./phenotypes.out
 </pre></div>
@@ -594,6 +743,76 @@ Writing output at ./phenotypes.out
 <span class="c1"># import GRC </span>
 <span class="n">grc_metadata</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;PATH_TO_GRC&#39;</span><span class="p">)</span>
 <span class="n">grc</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">grc_metadata</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">low_memory</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">folders</span><span class="o">/</span><span class="mi">7</span><span class="n">q</span><span class="o">/</span><span class="mi">6_4</span><span class="n">qz7114p3_14cw9ln9ysqw000dy3</span><span class="o">/</span><span class="n">T</span><span class="o">/</span><span class="n">ipykernel_32552</span><span class="o">/</span><span class="mf">4081404360.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># import results from Phenotyper run above</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">phenotyper_results</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;PATH_TO_OUTPUT&#39;</span><span class="p">)</span>
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">phenotyper_results</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">low_memory</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> 
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="c1"># import pf6+ data</span>
+
+<span class="nn">~/pf6plus/lib/python3.8/site-packages/pandas/util/_decorators.py</span> in <span class="ni">wrapper</span><span class="nt">(*args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">309</span>                     <span class="n">stacklevel</span><span class="o">=</span><span class="n">stacklevel</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">310</span>                 <span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">311</span>             <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">312</span> 
+<span class="g g-Whitespace">    </span><span class="mi">313</span>         <span class="k">return</span> <span class="n">wrapper</span>
+
+<span class="nn">~/pf6plus/lib/python3.8/site-packages/pandas/io/parsers/readers.py</span> in <span class="ni">read_csv</span><span class="nt">(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, squeeze, prefix, mangle_dupe_cols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, verbose, skip_blank_lines, parse_dates, infer_datetime_format, keep_date_col, date_parser, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, encoding_errors, dialect, error_bad_lines, warn_bad_lines, on_bad_lines, delim_whitespace, low_memory, memory_map, float_precision, storage_options)</span>
+<span class="g g-Whitespace">    </span><span class="mi">584</span>     <span class="n">kwds</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwds_defaults</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">585</span> 
+<span class="ne">--&gt; </span><span class="mi">586</span>     <span class="k">return</span> <span class="n">_read</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">587</span> 
+<span class="g g-Whitespace">    </span><span class="mi">588</span> 
+
+<span class="nn">~/pf6plus/lib/python3.8/site-packages/pandas/io/parsers/readers.py</span> in <span class="ni">_read</span><span class="nt">(filepath_or_buffer, kwds)</span>
+<span class="g g-Whitespace">    </span><span class="mi">480</span> 
+<span class="g g-Whitespace">    </span><span class="mi">481</span>     <span class="c1"># Create the parser.</span>
+<span class="ne">--&gt; </span><span class="mi">482</span>     <span class="n">parser</span> <span class="o">=</span> <span class="n">TextFileReader</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">483</span> 
+<span class="g g-Whitespace">    </span><span class="mi">484</span>     <span class="k">if</span> <span class="n">chunksize</span> <span class="ow">or</span> <span class="n">iterator</span><span class="p">:</span>
+
+<span class="nn">~/pf6plus/lib/python3.8/site-packages/pandas/io/parsers/readers.py</span> in <span class="ni">__init__</span><span class="nt">(self, f, engine, **kwds)</span>
+<span class="g g-Whitespace">    </span><span class="mi">809</span>             <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;has_index_names&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kwds</span><span class="p">[</span><span class="s2">&quot;has_index_names&quot;</span><span class="p">]</span>
+<span class="g g-Whitespace">    </span><span class="mi">810</span> 
+<span class="ne">--&gt; </span><span class="mi">811</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_engine</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">812</span> 
+<span class="g g-Whitespace">    </span><span class="mi">813</span>     <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<span class="nn">~/pf6plus/lib/python3.8/site-packages/pandas/io/parsers/readers.py</span> in <span class="ni">_make_engine</span><span class="nt">(self, engine)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1038</span>             <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1039</span>         <span class="c1"># error: Too many arguments for &quot;ParserBase&quot;</span>
+<span class="ne">-&gt; </span><span class="mi">1040</span>         <span class="k">return</span> <span class="n">mapping</span><span class="p">[</span><span class="n">engine</span><span class="p">](</span><span class="bp">self</span><span class="o">.</span><span class="n">f</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">)</span>  <span class="c1"># type: ignore[call-arg]</span>
+<span class="g g-Whitespace">   </span><span class="mi">1041</span> 
+<span class="g g-Whitespace">   </span><span class="mi">1042</span>     <span class="k">def</span> <span class="nf">_failover_to_python</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<span class="nn">~/pf6plus/lib/python3.8/site-packages/pandas/io/parsers/c_parser_wrapper.py</span> in <span class="ni">__init__</span><span class="nt">(self, src, **kwds)</span>
+<span class="g g-Whitespace">     </span><span class="mi">49</span> 
+<span class="g g-Whitespace">     </span><span class="mi">50</span>         <span class="c1"># open handles</span>
+<span class="ne">---&gt; </span><span class="mi">51</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_open_handles</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">52</span>         <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+<span class="g g-Whitespace">     </span><span class="mi">53</span> 
+
+<span class="nn">~/pf6plus/lib/python3.8/site-packages/pandas/io/parsers/base_parser.py</span> in <span class="ni">_open_handles</span><span class="nt">(self, src, kwds)</span>
+<span class="g g-Whitespace">    </span><span class="mi">220</span>         <span class="n">Let</span> <span class="n">the</span> <span class="n">readers</span> <span class="nb">open</span> <span class="n">IOHandles</span> <span class="n">after</span> <span class="n">they</span> <span class="n">are</span> <span class="n">done</span> <span class="k">with</span> <span class="n">their</span> <span class="n">potential</span> <span class="n">raises</span><span class="o">.</span>
+<span class="g g-Whitespace">    </span><span class="mi">221</span>         <span class="s2">&quot;&quot;&quot;</span>
+<span class="ne">--&gt; </span><span class="mi">222</span><span class="s2">         self.handles = get_handle(</span>
+<span class="g g-Whitespace">    </span><span class="mi">223</span><span class="s2">             src,</span>
+<span class="g g-Whitespace">    </span><span class="mi">224</span><span class="s2">             &quot;r&quot;,</span>
+
+<span class="nn">~/pf6plus/lib/python3.8/site-packages/pandas/io/common.py</span> in <span class="ni">get_handle</span><span class="nt">(path_or_buf, mode, encoding, compression, memory_map, is_text, errors, storage_options)</span>
+<span class="g g-Whitespace">    </span><span class="mi">700</span><span class="s2">         if ioargs.encoding and &quot;b&quot; not in ioargs.mode:</span>
+<span class="g g-Whitespace">    </span><span class="mi">701</span><span class="s2">             # Encoding</span>
+<span class="ne">--&gt; </span><span class="mi">702</span><span class="s2">             handle = open(</span>
+<span class="g g-Whitespace">    </span><span class="mi">703</span><span class="s2">                 handle,</span>
+<span class="g g-Whitespace">    </span><span class="mi">704</span><span class="s2">                 ioargs.mode,</span>
+
+<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;./phenotypes.out&#39;
 </pre></div>
 </div>
 </div>
@@ -1126,7 +1345,7 @@ Writing output at ./phenotypes.out
             <i class="prevnext-label fas fa-angle-left"></i>
             <div class="prevnext-info">
                 <p class="prevnext-label">previous</p>
-                <p class="prevnext-title">Visualizing drug resistant variants</p>
+                <p class="prevnext-title">Analysing patterns of drug resistance</p>
             </div>
         </a>
     </div>
