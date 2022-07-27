@@ -21,7 +21,7 @@ def plot_samples_per_country_and_study_histogram(dataset):
 def plot_temporal_samples_histogram(dataset):
     # Find samples per year for WGS and amplicon
     process_and_year_count = (
-        dataset.groupby(["Process", "Year"]).size().unstack().fillna(0).transpose()
+        dataset.groupby(["SampleType", "Year"]).size().unstack().fillna(0).transpose()
     )
     process_and_year_count["GenRe-Mekong"] = process_and_year_count.drop(
         ["WGS"], axis=1

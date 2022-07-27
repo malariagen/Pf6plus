@@ -107,15 +107,22 @@ def map_samples(data, data_subset=None, zoom_to_start=2, location=[13.1339, 16.1
         # samples per location
         samples_per_location = find_samples_per_location(country_data)
         for _, location in samples_per_location.iterrows():
+            # skip unknown coordinates
+            if (location["LatitudeAdmDiv1"] == '-'):
+                continue
+            else:
+                latitude = location["LatitudeAdmDiv1"]
+                longitude = location["LongitudeAdmDiv1"]
+                
             # Studies for site
             studies = find_studies_at_coord(
-                country_data, location["Latitude_adm1"], location["Longitude_adm1"]
+                country_data, latitude, longitude
             )
             # Add marker to country cluster
             mapper.add_marker_to_cluster(
                 country_cluster,
-                location["Latitude_adm1"],
-                location["Longitude_adm1"],
+                latitude,
+                longitude,
                 country,
                 int(location.Samples),
                 studies,

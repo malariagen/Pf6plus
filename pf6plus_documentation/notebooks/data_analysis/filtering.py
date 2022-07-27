@@ -70,23 +70,23 @@ def filter_countries_and_years_below_threshold(data, threshold):
 
 
 def filter_WGS_data(data):
-    return data.loc[data["Process"] == "WGS"].copy()
+    return data.loc[data["SampleType"] == "WGS"].copy()
 
 
 def filter_non_WGS_data(data):
-    return data.loc[data["Process"] != "WGS"].copy()
+    return data.loc[data["SampleType"] != "WGS"].copy()
 
 
 def find_studies_at_coord(data, lat, long):
     studies = np.unique(
-        data.loc[data["Latitude_adm1"] == lat].loc[data["Longitude_adm1"] == long].Study
+        data.loc[data["LatitudeAdmDiv1"] == lat].loc[data["LongitudeAdmDiv1"] == long].Study
     )
     return studies
 
 
 def find_samples_per_location(data):
     samples_per_location = (
-        data.groupby(["Longitude_adm1", "Latitude_adm1"])
+        data.groupby(["LongitudeAdmDiv1", "LatitudeAdmDiv1"])
         .size()
         .reset_index()
         .rename(columns={0: "Samples"})
